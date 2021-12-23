@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".paketlemePaletlerTab">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/paketlemeHomeTitle"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:text="Paletler Listesi"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="30dp"
+        />
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/paketlemeHomeTitle"
+        android:id="@+id/paletlerListView"
+        android:layout_marginTop="50dp"
+        tools:listitem="@layout/paletler_list_item"
+        />
+
+</FrameLayout>

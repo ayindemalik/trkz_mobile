@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".PaletOlusturmaMenu">
+
+        <!-- TODO: Update blank fragment layout -->
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/paletOlusturmaMenuIcone"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:layout_centerInParent="true"
+            android:src="@drawable/menu"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/paketlemeHomeTitle"
+            android:layout_marginTop="20dp"
+            android:text="Palet Oluşturma İşlemleri"
+            android:textAlignment="center"
+            android:textColor="@color/teal_200"
+            android:textSize="30dp"/>
+
+        <Button
+            android:id="@+id/pOlYeniPaletOlustur"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginHorizontal="26dp"
+            android:background="@color/teal_200"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:text="Yeni Palet Oluştur" />
+
+        <Button
+            android:id="@+id/pOlPaletBul"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginHorizontal="26dp"
+            android:background="@color/teal_200"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:text="Palet Bul" />
+
+        <Button
+            android:id="@+id/pOlPaletAc"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginHorizontal="26dp"
+            android:background="@color/teal_200"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:text="Palet Aç" />
+
+        <Button
+            android:id="@+id/pOlEtiketYaz"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginHorizontal="26dp"
+            android:background="@color/teal_200"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:text="Etiket Yaz" />
+
+        <Button
+            android:id="@+id/pOlPaletBoz"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginHorizontal="26dp"
+            android:background="@color/teal_200"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:text="Palet Boz" />
+
+    </LinearLayout>
+</ScrollView>

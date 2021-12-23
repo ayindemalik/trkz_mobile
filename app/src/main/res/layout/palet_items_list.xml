@@ -1,0 +1,64 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:orientation="horizontal">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_marginStart="10dp">
+                <!-- IFS ID-->
+                <TextView
+                    android:id="@+id/urunBarkod"
+                    android:layout_width="100sp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="3dp"
+                    android:text="U.Barkod"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:id="@+id/urunStokKodu"
+                    android:layout_width="90sp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="3dp"
+                    android:layout_toRightOf="@id/urunBarkod"
+                    android:layout_alignTop="@id/urunBarkod"
+                    android:text="urunStokKodu"/>
+
+                <TextView
+                    android:id="@+id/ifsStokKodu"
+                    android:layout_width="90sp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="3dp"
+                    android:layout_toRightOf="@id/urunStokKodu"
+                    android:layout_alignTop="@id/urunStokKodu"
+                    android:text="ifsstokkodu"/>
+
+                <TextView
+                    android:id="@+id/ifsStokTani"
+                    android:layout_width="120sp"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/ifsStokKodu"
+                    android:layout_alignTop="@id/ifsStokKodu"
+                    android:text="ifsStokTani"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</LinearLayout>

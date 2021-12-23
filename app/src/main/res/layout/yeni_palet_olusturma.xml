@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".YeniPaletOlusturma"
+    android:paddingRight="10sp"
+    android:paddingLeft="10sp">
+<!--    Logo-->
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:layout_width="50sp"
+        android:layout_height="50sp"
+        android:id="@+id/paletOlusturmaMenuIcone"
+        android:layout_marginTop="10sp"
+        android:layout_gravity="center"
+        android:src="@drawable/package_load"/>
+<!--    Title-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10sp"
+        android:text="@string/palet_olusturmaTitle"
+        android:textColor="@color/teal_200"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:layout_width="400sp"
+        android:layout_height="5sp"
+        android:background="#ACA1A1"
+        android:layout_gravity="center"
+        android:layout_marginTop="3sp"
+    />
+
+<!--    FIRMA ADI-->
+    <TextView
+    android:id="@+id/firmaAdiLabel"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/firma_adiLabel"
+    android:gravity="center"
+    android:textStyle="bold"
+    android:textSize="20sp"
+    android:layout_marginLeft="5sp"/>
+<!--    <Spinner-->
+<!--        android:id="@+id/ypFirmaAdi"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="@drawable/bg_spinner"-->
+<!--        android:layout_marginLeft="8sp"-->
+<!--        android:textSize="30sp"/>-->
+    <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ypFirmaAdi"
+        android:background="@drawable/bg_spinner"
+        android:layout_marginLeft="8sp"
+        tools:listitem="@layout/yp_customers"/>
+<!--    <TextView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:id="@+id/textView"-->
+<!--        android:textSize="100sp"-->
+<!--        android:textStyle="bold"-->
+<!--        android:fontFamily="monospace"-->
+<!--        android:gravity="center"/>-->
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2sp"
+        android:background="#ACA1A1"
+        android:layout_gravity="center"
+        android:layout_marginTop="2sp"
+        />
+    <!--    ETIKET TIPI -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="3dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Palet Tipi:"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_marginLeft="5sp"/>
+        <Spinner
+            android:id="@+id/ypEtiket"
+            android:layout_width="265sp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_spinner"
+            android:layout_marginLeft="8sp"
+            android:textSize="30sp"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2sp"
+        android:background="#ACA1A1"
+        android:layout_gravity="center"
+        android:layout_marginTop="2sp"
+        />
+
+    <!--  URUN KODU-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="3dp">
+        <TextView
+            android:layout_width="115sp"
+            android:layout_height="wrap_content"
+            android:text="Ür BarKodu"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_marginLeft="4sp" />
+        <EditText
+            android:id="@+id/ypUrunBarKodu"
+            android:layout_width="265sp"
+            android:layout_height="35sp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:background="#55A8B8A8"
+            android:layout_marginRight="13sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5sp">
+        <TextView
+            android:layout_width="115sp"
+            android:layout_height="wrap_content"
+            android:text="Ürün Kodu"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_marginLeft="5sp" />
+        <EditText
+            android:id="@+id/ypUrunkodu"
+            android:layout_width="270sp"
+            android:layout_height="35sp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:background="#55A8B8A8"
+            android:layout_marginRight="13sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5sp">
+        <TextView
+            android:layout_width="115sp"
+            android:layout_height="wrap_content"
+            android:text="Tani"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_marginLeft="5sp" />
+        <EditText
+            android:id="@+id/ypUrunTani"
+            android:layout_width="250sp"
+            android:layout_height="wrap_content"
+            android:padding="2sp"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:background="#55A8B8A8"
+            android:layout_marginRight="13sp"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2sp"
+        android:background="#ACA1A1"
+        android:layout_gravity="center"
+        android:layout_marginTop="2sp"
+        />
+
+<!--    PALET BOY-->
+    <RadioGroup
+        android:id="@+id/ypKisaBoy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Palet Boy"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_marginRight="35sp"
+            android:layout_marginLeft="5sp"/>
+        <RadioButton
+            android:id="@+id/pboy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Boy"
+            android:gravity="center"
+            android:textSize="20sp"/>
+        <RadioButton
+            android:id="@+id/pkisa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kisa"
+            android:gravity="center"
+            android:textSize="20sp"/>
+    </RadioGroup>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2sp"
+        android:background="#ACA1A1"
+        android:layout_gravity="center"
+        android:layout_marginTop="2sp"
+        />
+
+<!--PALET TIPI-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="3sp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Palet Türü:"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_marginLeft="5sp"/>
+        <Spinner
+            android:id="@+id/ypPaletTipi"
+            android:layout_width="255sp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_spinner"
+            android:layout_marginLeft="8sp"
+            android:textSize="25sp"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2sp"
+        android:background="#ACA1A1"
+        android:layout_gravity="center"
+        android:layout_marginTop="2sp"
+        />
+
+    <!--SP No-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="3dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sip No:"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_marginLeft="5sp"/>
+        <Spinner
+            android:id="@+id/ypSpNo"
+            android:layout_width="150sp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_spinner"
+            android:layout_marginLeft="8sp"
+            android:textSize="30sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Adet"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_marginLeft="3sp"/>
+        <EditText
+            android:id="@+id/ypAdet"
+            android:layout_width="100sp"
+            android:layout_height="40sp"
+            android:textSize="20sp"
+            android:inputType="number"
+            android:background="#5676"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2sp"
+        android:background="#ACA1A1"
+        android:layout_gravity="center"
+        android:layout_marginTop="2sp"
+        />
+
+    <Button
+        android:id="@+id/ypBtnDevam"
+        android:layout_width="match_parent"
+        android:layout_height="60sp"
+        android:layout_marginTop="8sp"
+        android:layout_marginHorizontal="26sp"
+        android:background="@color/teal_200"
+        android:textColor="@color/white"
+        android:textSize="26sp"
+        android:text="Devam" />
+
+
+<!--    <RadioGroup-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal">-->
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textSize="20sp"-->
+<!--            android:text="Skills"-->
+<!--            android:layout_marginRight="53sp"-->
+<!--            android:layout_marginLeft="5sp"/>-->
+<!--        <CheckBox-->
+<!--            android:id="@+id/HTML"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="HTML"-->
+<!--            android:textSize="20sp"/>-->
+<!--    </RadioGroup>-->
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:layout_marginTop="10sp">-->
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Comment"-->
+<!--            android:textSize="20sp"-->
+
+<!--            android:layout_marginLeft="5sp"/>-->
+<!--        <EditText-->
+<!--            android:id="@+id/usercomment"-->
+<!--            android:layout_width="300sp"-->
+<!--            android:layout_height="100sp"-->
+<!--            android:hint="Enter your comments.."-->
+<!--            android:layout_marginLeft="15sp"-->
+<!--            android:background="#5676"/>-->
+
+<!--    </LinearLayout>-->
+
+
+
+</LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menuSiparisler"
+        android:icon="@drawable/orders"
+        android:title="@string/menuSiparisler"
+        />
+
+    <item
+        android:id="@+id/menuPaketleme"
+        android:icon="@drawable/packaging"
+        android:title="@string/menuPaketleme"
+        />
+
+    <item
+        android:id="@+id/menuSevkiyat"
+        android:icon="@drawable/forklift"
+        android:title="@string/menuSevkiyat"
+        />
+
+    <item
+        android:id="@+id/menuProcedur"
+        android:icon="@drawable/procedure"
+        android:title="@string/prosedur"
+        />
+
+    <item android:title="@string/odersInfo">
+        <menu>
+            <item
+                android:id="@+id/menuProfil"
+                android:icon="@drawable/profile"
+                android:title="@string/profilBaslik"/>
+            <item
+                android:id="@+id/menuAyarlari"
+                android:icon="@drawable/setting"
+                android:title="@string/ayariBaslik"/>
+            <item
+                android:id="@+id/menuUgulama"
+                android:icon="@drawable/about"
+                android:title="@string/bilgi"/>
+        </menu>
+    </item>
+
+</menu>

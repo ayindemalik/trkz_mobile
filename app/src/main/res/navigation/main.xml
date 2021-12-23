@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    app:startDestination="@id/menuSiparisler"
+    >
+
+    <fragment
+        android:id="@+id/menuSiparisler"
+        android:name="com.example.trkz_mobile.SiparisFragment"
+        android:label="Siparişler"
+        tools:layout="@layout/siparis_fragment" />
+
+    <fragment
+        android:id="@+id/menuPaketleme"
+        android:name="com.example.trkz_mobile.PaketlemeFragment"
+        android:label="Paketleme"
+        tools:layout="@layout/paketleme_fragment" />
+
+    <fragment
+        android:id="@+id/menuSevkiyat"
+        android:name="com.example.trkz_mobile.SevkiyatFragment"
+        android:label="Sevkiyat"
+        tools:layout="@layout/sevkiyat_fragment" />
+
+    <fragment
+        android:id="@+id/menuProsedur"
+        android:name="com.example.trkz_mobile.ProsedurFragment"
+        android:label="Işlem Prosedürleri"
+        tools:layout="@layout/prosedur_fragment" />
+
+
+</navigation>

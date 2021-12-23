@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5sp"
+        android:background="@color/teal_200">
+        <!-- Adet -->
+        <TextView
+            android:id="@+id/adetLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:text="Adet:"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/qty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/adetLabel"
+            android:layout_alignTop="@id/adetLabel"
+            android:text="00090"
+            android:textSize="13sp"
+            android:textColor="@color/colorPrimaryText" />
+
+        <!-- HADLING UNIT TYPE -->
+        <TextView
+            android:id="@+id/handlingTypeIdLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/adetLabel"
+            android:layout_marginRight="10dp"
+            android:text="Taş B. Tipi:"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/handlingTypeId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/handlingTypeIdLabel"
+            android:layout_alignTop="@id/handlingTypeIdLabel"
+            android:text="01.01.2021"
+            android:textSize="13sp"
+            android:textColor="@color/colorPrimaryText" />
+
+        <!-- TANIM -->
+        <TextView
+            android:id="@+id/tanimLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/handlingTypeIdLabel"
+            android:layout_marginRight="10dp"
+            android:text="Tanım:"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tanim"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/tanimLabel"
+            android:layout_alignTop="@id/tanimLabel"
+            android:text="01.01.2021"
+            android:textSize="13sp"
+            android:textColor="@color/colorPrimaryText" />
+    </RelativeLayout>
+    <View
+        android:layout_width="400sp"
+        android:layout_height="3sp"
+        android:background="@color/colorWhite"
+        android:layout_gravity="center"
+        android:layout_marginTop="3sp"
+        />
+</LinearLayout>

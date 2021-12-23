@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".PaletlerListesi">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/paletlistesiHomeTitle"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:text="Paletler Listesi"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:background="?attr/colorButtonNormal"
+        android:textSize="30dp"
+        />
+    <EditText
+        android:layout_below="@+id/paletlistesiHomeTitle"
+        android:id="@+id/paletAra"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginLeft="15sp"
+        android:layout_marginRight="15sp"
+        android:hint="Palet ara" />
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/paletAra"
+        android:id="@+id/paletlerListView"
+        android:layout_marginTop="5dp"
+        tools:listitem="@layout/paletler_list_item"
+        />
+
+</RelativeLayout>

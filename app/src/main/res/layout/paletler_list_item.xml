@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:orientation="horizontal">
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/customPic"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/packaging"/>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_marginStart="10dp">
+                    <!-- IFS ID-->
+                    <TextView
+                        android:id="@+id/ifsLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:text="IFS ID :"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/ifsID"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/ifsLabel"
+                        android:layout_alignTop="@id/ifsLabel"
+                        android:text="00090"
+                        android:textColor="@color/colorPrimaryText" />
+
+                    <!-- Tarih -->
+                    <TextView
+                        android:id="@+id/tarihLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/ifsID"
+                        android:layout_marginRight="10dp"
+                        android:text="Tarih :"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/tarih"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/tarihLabel"
+                        android:layout_alignTop="@id/tarihLabel"
+                        android:text="01.01.2021"
+                        android:textColor="@color/colorPrimaryText" />
+
+                    <!-- KAPATMA DURUMU -->
+                    <TextView
+                        android:id="@+id/durum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tarih"
+                        android:layout_marginRight="10dp"
+                        android:text="KAPATMA DURUMU :"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/kapalimi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/durum"
+                        android:layout_alignTop="@id/durum"
+                        android:text="01.01.2021"
+                        android:textColor="@color/colorPrimaryText" />
+                    <!-- BARKOD-->
+                    <TextView
+                        android:id="@+id/barkodLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/durum"
+                        android:layout_marginRight="10dp"
+                        android:text="BARKOD :"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/barkod"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/barkodLabel"
+                        android:layout_alignTop="@id/barkodLabel"
+                        android:text="K"
+                        android:textColor="@color/colorPrimaryText" />
+
+                    <!-- CARI UNVAN-->
+                    <TextView
+                        android:id="@+id/cariLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/barkodLabel"
+                        android:layout_marginRight="10dp"
+                        android:text="CARI :"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/cariUnvani"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/cariLabel"
+                        android:layout_alignTop="@id/cariLabel"
+                        android:text="09ihgj"
+                        android:inputType="textMultiLine"
+                        android:textColor="@color/colorPrimaryText" />
+
+                    <!-- CARI UNVAN-->
+                    <TextView
+                        android:id="@+id/lrefLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/cariLabel"
+                        android:layout_marginRight="10dp"
+                        android:text="LREF :"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/lref"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/lrefLabel"
+                        android:layout_alignTop="@id/lrefLabel"
+                        android:text="09ihgj"
+                        android:textColor="@color/colorPrimaryText" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</LinearLayout>

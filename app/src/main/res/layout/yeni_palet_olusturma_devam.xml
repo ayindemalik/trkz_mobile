@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".YeniPaletOlusturmaDevam">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/header"
+            android:background="#F1FeFF">
+
+            <EditText
+                android:id="@+id/input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:ems="10"
+                android:hint="Barkod okut" />
+            <ImageView
+                android:layout_width="40sp"
+                android:layout_height="40sp"
+                android:layout_toRightOf="@id/input"
+                android:id="@+id/add"
+                android:layout_marginLeft="7sp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/add_item"/>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/detayTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/header"
+            android:text="Paletin içindekileri"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:textColor="@color/white"
+            android:background = "@color/colorPrimary"
+            android:textAlignment="center"/>
+
+
+        <HorizontalScrollView
+            android:id = "@+id/horizontalScrollView1"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:layout_alignParentLeft = "true"
+            android:layout_alignParentRight = "true"
+            android:layout_below = "@+id/detayTitle">
+
+            <LinearLayout
+                android:layout_width = "match_parent"
+                android:layout_height = "350sp"
+                android:orientation = "vertical"
+                android:layout_margin="5dp"
+                android:padding="5dp"
+                android:layout_marginStart="5dp"
+                >
+
+                <LinearLayout
+                    android:layout_width = "match_parent"
+                    android:layout_height = "wrap_content"
+                    android:orientation = "horizontal"
+                    android:background="@color/purple_200">
+                    <TextView
+                        android:id = "@+id/lrf_header"
+                        android:layout_width = "65sp"
+                        android:layout_height = "wrap_content"
+                        android:layout_marginLeft = "0dp"
+                        android:layout_marginStart = "1dp"
+                        android:layout_alignParentTop = "true"
+                        android:layout_marginRight="2sp"
+                        android:maxLines = "1"
+                        android:text = "P Ref"
+                        android:textColor="@color/white"
+                        android:textAppearance = "?android:attr/textAppearanceLarge"
+                        android:textSize = "17sp"/>
+
+                    <TextView
+                        android:id = "@+id/urb_header"
+                        android:layout_width = "110sp"
+                        android:layout_height = "wrap_content"
+                        android:layout_toRightOf="@id/lrf_header"
+                        android:maxLines = "1"
+                        android:text="Barkodu"
+                        android:textColor="@color/white"
+                        android:textAppearance = "?android:attr/textAppearanceLarge"
+                        android:textSize = "17sp"/>
+
+                    <TextView
+                        android:id = "@+id/ur_sk_kod_header"
+                        android:layout_width = "100sp"
+                        android:layout_height = "wrap_content"
+                        android:layout_alignParentTop = "true"
+                        android:layout_marginLeft = "5dp"
+                        android:maxLines = "1"
+                        android:text="Stok Kodu"
+                        android:textColor="@color/white"
+                        android:textAppearance = "?android:attr/textAppearanceLarge"
+                        android:textSize = "17sp"/>
+
+                    <TextView
+                        android:id = "@+id/ifs_sk_kod_header"
+                        android:layout_width = "150sp"
+                        android:layout_height = "wrap_content"
+                        android:layout_alignParentTop = "true"
+                        android:layout_marginLeft = "5dp"
+                        android:maxLines = "1"
+                        android:text="Ifs Stok Kodu"
+                        android:textColor="@color/white"
+                        android:textAppearance = "?android:attr/textAppearanceLarge"
+                        android:textSize = "17sp"/>
+
+                    <TextView
+                        android:id = "@+id/ifs_sk_tani_header"
+                        android:layout_width = "235sp"
+                        android:layout_height = "wrap_content"
+                        android:layout_alignParentTop = "true"
+                        android:layout_marginLeft = "5dp"
+                        android:maxLines = "1"
+                        android:text="Ifs Stok Tanı"
+                        android:textColor="@color/white"
+                        android:textAppearance = "?android:attr/textAppearanceLarge"
+                        android:textSize = "17sp"/>
+
+                    <TextView
+                        android:id = "@+id/_adet_header"
+                        android:layout_width = "40sp"
+                        android:layout_height = "wrap_content"
+                        android:layout_alignParentTop = "true"
+                        android:layout_marginLeft = "5dp"
+                        android:maxLines = "1"
+                        android:text="Adet"
+                        android:textColor="@color/white"
+                        android:textAppearance = "?android:attr/textAppearanceLarge"
+                        android:textSize = "17sp"/>
+
+                    <TextView
+                        android:id = "@+id/tarih_header"
+                        android:layout_width = "110sp"
+                        android:layout_height = "wrap_content"
+                        android:layout_alignParentTop = "true"
+                        android:layout_marginLeft = "5dp"
+                        android:maxLines = "1"
+                        android:text="Tarih"
+                        android:textColor="@color/white"
+                        android:textAppearance = "?android:attr/textAppearanceLarge"
+                        android:textSize = "17sp"/>
+
+                </LinearLayout>
+
+                <ListView
+                    android:layout_marginTop = "5sp"
+                    android:layout_weight = "1"
+                    android:headerDividersEnabled = "true"
+                    android:id="@+id/paletItemsListView"
+                    android:layout_width="match_parent"
+                    android:layout_height="350dp"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    tools:listitem="@layout/palet_items_list">
+                </ListView>
+            </LinearLayout>
+        </HorizontalScrollView>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/horizontalScrollView1"
+            android:text="Palet Özeti"
+            android:layout_marginTop="10sp"
+            android:id="@+id/ozetTitle"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:textColor="@color/white"
+            android:background = "@color/colorPrimary"
+            android:textAlignment="center"/>
+        <TextView
+            android:id="@+id/mmmmm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ozetTitle"
+            android:text="Show transfered data"
+            android:textStyle="bold"
+            android:textAlignment="center"/>
+    </RelativeLayout>
+
+</ScrollView>

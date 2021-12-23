@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+
+    android:paddingBottom="20dp"
+    android:paddingRight="20dp"
+    android:paddingLeft="20dp"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="@drawable/trkz_img"
+    tools:context=".Giris">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="serif"
+            android:text="@string/giris_hosgeldin"
+            android:textColor="#03DAC6"
+            android:textSize="50sp" />
+    </LinearLayout>
+
+
+
+    <!-- User / Pass-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        android:orientation="vertical">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/kullaniciID"
+            android:textColor="#000"
+
+            android:hint="@string/girsText"
+            android:textSize="25sp"
+            android:background="#fafafa"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/girisButon"
+            android:layout_width="200sp"
+            android:layout_height="60dp"
+            android:layout_marginTop="20sp"
+            android:background="#009688"
+            android:text="@string/girisButon" />
+
+    </LinearLayout>
+
+</LinearLayout>
+<!--</androidx.constraintlayout.widget.ConstraintLayout>-->

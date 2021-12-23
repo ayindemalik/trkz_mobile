@@ -1,3 +1,30 @@
 <resources>
     <string name="app_name">Trkz_mobile</string>
+    <string name="giris_hosgeldin">Hoş Geldiniz</string>
+    <string name="girisButon">Giriş Yapınız</string>
+    <string name="girsText">Giriş kimliğnizi giriniz</string>
+
+    <string name="menuSiparisler">Siparişler</string>
+    <string name="prosedur">Kullanma Klavuzu</string>
+    <string name="menuSevkiyat">Sevkiyatlar</string>
+    <string name="odersInfo">Diğer işlemler</string>
+    <string name="profilBaslik">Profilim</string>
+    <string name="ayariBaslik">Ayarler</string>
+    <string name="bilgi">Bilgi</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- TODO: PAKETLEME STRINGLERI -->
+    <string name="menuPaketleme">Paketleme</string>-
+    <string name="paketlemeHomeMenuTitle">Pakeleme Menüsü </string>
+    <string name="menuPaketlemeMenuBtn1">Palet Oluştur</string>
+    <string name="menuPaketlemeMenuBtn2">Takım Oluştur</string>
+    <string name="menuPaketlemeMenuBtn3">Palet Bul</string>
+    <string name="menuPaketlemeMenuBtn4">Üretim Barkod Oluştur</string>
+
+    <!-- ACTIVITY: PALET OLUSTURMA STRINGLERI -->
+    <string name="palet_olusturmaTitle">Palet Olusturma / Paletin Ön Bilgileri</string>
+    <string name="firma_adiLabel">Firma Adi:</string>
+
+
 </resources>
