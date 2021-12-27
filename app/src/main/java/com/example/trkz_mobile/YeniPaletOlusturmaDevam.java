@@ -30,8 +30,9 @@ import java.util.TimerTask;
 
 public class YeniPaletOlusturmaDevam extends AppCompatActivity {
     public YeniPaletOlusturmaDevamBinding  binding;
-    ListView paletItemsList;
+    ListView paletIcerikDetayListView, paletIcerikOzetListView;
     PaletAdapter paletAdapter;
+    PaletIcerikOzetiAdapter palletIcerikOzetAdapter;
     EditText bKodInput;
 
     int itemCount = 0;
@@ -50,7 +51,7 @@ public class YeniPaletOlusturmaDevam extends AppCompatActivity {
     TextView showData;
 
     PaletModel paletBilgileri;
-    ArrayList<PaletIcerikModel> paletIcerikList;
+    ArrayList<PaletIcerikModel> paletIcerikList, paletIcerikOzet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,12 +60,17 @@ public class YeniPaletOlusturmaDevam extends AppCompatActivity {
         View root = binding.getRoot();
         setContentView(root);
         intent = getIntent();
-        paletItemsList = binding.paletItemsListView;
-        bKodInput = binding.input;
+        paletIcerikDetayListView = binding.paletItemsListView;
+        paletIcerikOzetListView = binding.paletIcerikOzetListView;
+        bKodInput = binding.input ;
+        bKodInput.setShowSoftInputOnFocus(false);
 
 //        paletAdapter = new PaletAdapter(getBaseContext(), R.layout.palet_items_list);
         paletAdapter = new PaletAdapter(getBaseContext(), R.layout.palet_icerik_detay);
-        paletItemsList.setAdapter(paletAdapter);
+        paletIcerikDetayListView.setAdapter(paletAdapter);
+
+        palletIcerikOzetAdapter = new PaletIcerikOzetiAdapter(getBaseContext(), R.layout.palet_icerik_ozet_row);
+        paletIcerikOzetListView.setAdapter(palletIcerikOzetAdapter);
 //        for (int i=1; i < 11; i++ ){
 //            PaletItemsModel paletItemsModel = new PaletItemsModel(i+"_UBKOD",i+"_USTKOD", i+"_IFSTKOD", i+"_IFS_ST_TANI" );
 //            Log.d("P Item MODEL DATA::", paletItemsModel.toString());
@@ -73,17 +79,17 @@ public class YeniPaletOlusturmaDevam extends AppCompatActivity {
 //            paletAdapter.notifyDataSetChanged();
 //        }
 
-        showData = binding.mmmmm;
+//        showData = binding.mmmmm;
         paletRef = intent.getStringExtra("lrf");
         lrf =  intent.getStringExtra("lrf");
         adet = intent.getStringExtra("adet") ;
         etiketTipi =  intent.getStringExtra("paletTipi");
         urunKodu = intent.getStringExtra("urunKodu");
-        String data = "lrf : "+lrf
-                +"\n"+ "adet : "+adet
-                +"\n"+ "paletTipi : "+etiketTipi
-                +"\n"+ "urunKodu : "+urunKodu;
-        showData.setText(data);
+//        String data = "lrf : "+lrf
+//                +"\n"+ "adet : "+adet
+//                +"\n"+ "paletTipi : "+etiketTipi
+//                +"\n"+ "urunKodu : "+urunKodu;
+//        showData.setText(data);
 
         bKodInput.addTextChangedListener(new TextWatcher() {
             String inputText;
@@ -116,6 +122,9 @@ public class YeniPaletOlusturmaDevam extends AppCompatActivity {
         // PALET ICERIKLERI
         loadPaletIcerikleri(paletRef);
 
+        // PALET ICERIKLERI OZET
+        loadPaletIcerikOzet(paletRef);
+
     }
     // FOR TIMING
     //  Solution link : https://www.py4u.net/discuss/625126
@@ -129,13 +138,14 @@ public class YeniPaletOlusturmaDevam extends AppCompatActivity {
             }
         }
     };
+
     public void operation(String inputText){
         if(inputText != ""){
-            PaletItemsModel paletItemsModel = new PaletItemsModel(""+inputText,itemCount+"_USTKOD", itemCount+"_IFSTKOD", itemCount+"_IFS_ST_TANI" );
-            Log.d("P Item MODEL DATA::", paletItemsModel.toString());
-            PaletAdapter.OPERATION = "PALET_ITEM";
-            paletAdapter.addPaletitem(paletItemsModel);
-            paletAdapter.notifyDataSetChanged();
+//            PaletItemsModel paletItemsModel = new PaletItemsModel(""+inputText,itemCount+"_USTKOD", itemCount+"_IFSTKOD", itemCount+"_IFS_ST_TANI" );
+//            Log.d("P Item MODEL DATA::", paletItemsModel.toString());
+//            PaletAdapter.OPERATION = "PALET_ITEM";
+//            paletAdapter.addPaletitem(paletItemsModel);
+//            paletAdapter.notifyDataSetChanged();
 //            bKodInput.setText("");
         }
     }
@@ -146,10 +156,17 @@ public class YeniPaletOlusturmaDevam extends AppCompatActivity {
         Log.d("loadPaletBilgileri:->", paletRef_);
         task.execute("loadPaletBilgeri", paletRef_);
     }
+
     public void loadPaletIcerikleri(String paletRef_){
         BackgroudTask task = new BackgroudTask(this);
-        Log.d("loadPaletBilgileri:->", paletRef_);
+        Log.d("loadPaletIcerikkeri:->", paletRef_);
         task.execute("loadPaletIcerikkeri", paletRef_);
+    }
+
+    public void loadPaletIcerikOzet(String paletRef_){
+        BackgroudTask task = new BackgroudTask(this);
+        Log.d("loadPaletIcerikOzeti:->", paletRef_);
+        task.execute("loadPaletIcerikOzeti", paletRef_);
     }
 
 
@@ -175,10 +192,13 @@ public class YeniPaletOlusturmaDevam extends AppCompatActivity {
             else if (ACTION.equals("loadPaletIcerikkeri")) {
                 result = service.paletIcerikDetay(params[1]);
             }
-
+            else if (ACTION.equals("loadPaletIcerikOzeti")) {
+                result = service.paletIcerikOzet(params[1]);
+            }
 
             return null;
         }
+
         @SuppressLint("LongLogTag")
         @Override
         protected void onPostExecute(String result2) {
@@ -193,7 +213,10 @@ public class YeniPaletOlusturmaDevam extends AppCompatActivity {
                 Log.d("RESULT_loadPaletIcerikkeri:", result);
                 paletIcerikList = paletIcerikXMLParse(result);
             }
-
+            if (ACTION.equals("loadPaletIcerikOzeti")) {
+                Log.d("RESULT _loadPaletIcerikOzeti:", result);
+                paletIcerikList = paletIcerikOzetiXMLParse(result);
+            }
         }
 
         // PALETLER BILGILERI
@@ -372,7 +395,7 @@ public class YeniPaletOlusturmaDevam extends AppCompatActivity {
             return elementCount;
         }
 
-        // PALETLER TIPI
+        // PALET ICERILERI
         public ArrayList<PaletIcerikModel> paletIcerikXMLParse(String result_){
             ArrayList<PaletIcerikModel> paletIcerikList = new ArrayList<>();
             try {
@@ -471,54 +494,54 @@ public class YeniPaletOlusturmaDevam extends AppCompatActivity {
             return paletIcerikList;
         }
 
-        // Parse Product
-        public ArrayList<ProductModel> yeniProdXMLParse(String result_){
-            ArrayList<ProductModel> productArrayList = new ArrayList<>();
-
+        // Parse PALET ICERIK OZETI
+        public ArrayList<PaletIcerikModel> paletIcerikOzetiXMLParse(String result_){
+            ArrayList<PaletIcerikModel> paletIcerikOzet = new ArrayList<>();
             try {
                 XmlPullParserFactory xmlPullParserFactory =  XmlPullParserFactory.newInstance();
                 XmlPullParser xmlPullParser = xmlPullParserFactory.newPullParser();
                 xmlPullParser.setInput(IOUtils.toInputStream(result_),"utf-8");
                 int event = xmlPullParser.getEventType();
-                Boolean yeniKodBool = false, yeniTanimBool = false;
-                String yeniKod= "", yeniTanim = ""; int count = 0;
+                Boolean uru_Stok_SodBool = false, ifs_Stok_KoduBool = false,  ifs_Stok_TanimiBool = false, adetBool = false ;
+
+                String uru_Stok_Sod = "", ifs_Stok_Kodu = "", ifs_Stok_Tanimi = "";
+                int adet = 0;
 
                 while (event != xmlPullParser.END_DOCUMENT)
                 {
                     if ( event == xmlPullParser.START_TAG){
-                        if(xmlPullParser.getName().equals("YeniKod"))
-                            yeniKodBool = true;
-                        if(xmlPullParser.getName().equals("YeniTanim"))
-                            yeniTanimBool = true;
+                        if(xmlPullParser.getName().equals("uru_stok_kod")) uru_Stok_SodBool = true;
+                        if(xmlPullParser.getName().equals("IFS_stok_tanimi")) ifs_Stok_TanimiBool = true;
+                        if(xmlPullParser.getName().equals("IFS_stok_kodu")) ifs_Stok_KoduBool = true;
+                        if(xmlPullParser.getName().equals("Adet")) adetBool = true;
                     }
 
-                    if(event == xmlPullParser.TEXT){ // If
-                        if(yeniKodBool){
-                            yeniKod = xmlPullParser.getText();
-                            yeniKodBool = false;
-                        }
-                    }
+                    if(event == xmlPullParser.TEXT)
+                        if(uru_Stok_SodBool){ uru_Stok_Sod = xmlPullParser.getText(); uru_Stok_SodBool = false; }
+                    if(event == xmlPullParser.TEXT)
+                        if(ifs_Stok_TanimiBool){ ifs_Stok_Tanimi = xmlPullParser.getText(); ifs_Stok_TanimiBool = false; }
+                    if(event == xmlPullParser.TEXT)
+                        if(ifs_Stok_KoduBool){ ifs_Stok_Kodu = xmlPullParser.getText(); ifs_Stok_KoduBool = false; }
 
-                    if(event == xmlPullParser.TEXT){ //
-                        if(yeniTanimBool){
-                            yeniTanim = xmlPullParser.getText();
-                            yeniTanimBool=false;
-                        }
-                    }
+                    if(event == xmlPullParser.TEXT)
+                        if(adetBool){ adet = Integer.valueOf(xmlPullParser.getText()); adetBool = false; }
 
-                    if (!yeniKod.equals("") && !yeniTanim.equals("")){
-                        count++;
-                        ProductModel productModel = new ProductModel(yeniKod, yeniTanim);
-                        Log.d("Prod MODEL DATA::", productModel.toString());
-                        productArrayList.add(productModel);
-                        yeniKod = ""; yeniTanim ="";
+                    if (!uru_Stok_Sod.equals("") && !ifs_Stok_Tanimi.equals("") && !ifs_Stok_Kodu.equals("") ){
+                        PaletIcerikModel icerikOzetModel = new PaletIcerikModel(uru_Stok_Sod, ifs_Stok_Tanimi, ifs_Stok_Kodu, adet);
+                        paletIcerikOzet.add(icerikOzetModel);
+
+//                      PaletAdapter.OPERATION = "PALET_ICERIK_OZET";
+                        palletIcerikOzetAdapter.addPaletIcerikOzeti(icerikOzetModel);
+                        palletIcerikOzetAdapter.notifyDataSetChanged();
+
+                        ifs_Stok_Kodu = ""; ifs_Stok_Tanimi = "";uru_Stok_Sod = ""; adet = 0;
                     }
 
                     if(event == xmlPullParser.END_TAG){
-                        if(xmlPullParser.getName().equals("YeniKod"))
-                            yeniKodBool =false;
-                        if(xmlPullParser.getName().equals("YeniTanim"))
-                            yeniTanimBool =false;
+                        if(xmlPullParser.getName().equals("IFS_stok_kodu")) ifs_Stok_KoduBool = false;
+                        if(xmlPullParser.getName().equals("IFS_stok_tanimi")) ifs_Stok_TanimiBool = false;
+                        if(xmlPullParser.getName().equals("uru_stok_kod")) uru_Stok_SodBool = false;
+                        if(xmlPullParser.getName().equals("Adet")) adetBool = false;
                     }
                     event = xmlPullParser.next();
                 }
@@ -526,46 +549,11 @@ public class YeniPaletOlusturmaDevam extends AppCompatActivity {
             }catch (Exception ex){
                 ex.printStackTrace();
             }
-            return productArrayList;
+            return paletIcerikOzet;
         }
 
 
 
-        // PALET OLUSTUR RESULT
-        public String parsePaletXmlResult(String result_){
-            String paletLrf= "";
-            try {
-                XmlPullParserFactory xmlPullParserFactory =  XmlPullParserFactory.newInstance();
-                XmlPullParser xmlPullParser = xmlPullParserFactory.newPullParser();
-                xmlPullParser.setInput(IOUtils.toInputStream(result_),"utf-8");
-                int event = xmlPullParser.getEventType();
-                Boolean paletLrfBool = false;
-
-                while (event != xmlPullParser.END_DOCUMENT)
-                {
-                    if ( event == xmlPullParser.START_TAG){
-                        if(xmlPullParser.getName().equals("PaletOlusturResult"))
-                            paletLrfBool = true;
-                    }
-
-                    if(event == xmlPullParser.TEXT){ //
-                        if(paletLrfBool){
-                            paletLrf = xmlPullParser.getText();
-                            paletLrfBool = false;
-                        }
-                    }
-
-                    if(event == xmlPullParser.END_TAG){
-                        if(xmlPullParser.getName().equals("PaletOlusturResult")) paletLrfBool =false;
-                    }
-                    event = xmlPullParser.next();
-                }
-
-            }catch (Exception ex){
-                ex.printStackTrace();
-            }
-            return paletLrf;
-        }
     }
 
 }

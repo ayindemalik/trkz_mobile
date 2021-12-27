@@ -29,6 +29,13 @@ public class PaletIcerikModel {
         this.kullanicilarRef = kullanicilarRef;
     }
 
+    public PaletIcerikModel( String uru_Stok_Kodu, String ifs_Stok_Tanimi, String ifs_Stok_Kodu,  int adet) {
+        this.uru_Stok_Kodu = uru_Stok_Kodu;
+        this.ifs_Stok_Tanimi = ifs_Stok_Tanimi;
+        this.ifs_Stok_Kodu = ifs_Stok_Kodu;
+        this.adet = adet;
+    }
+
     public String getlRef() {
         return lRef;
     }

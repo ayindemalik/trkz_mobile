@@ -42,6 +42,11 @@ public class PaletAdapter extends ArrayAdapter {
         list.add(object);
     }
 
+    public void addPaletIcerikOzeti( @NonNull PaletIcerikModel object){
+        super.add(object);
+        list.add(object);
+    }
+
     @Override
     public int getCount(){
         return list.size();
@@ -71,19 +76,11 @@ public class PaletAdapter extends ArrayAdapter {
             return returnedView;
         }
 
-        else if(OPERATION.equals("PALET_ITEM")){
-            Log.d("ADAPTER_CALLED", "ADAPTER GET VIEW CALLED... Pos: "+position);
-            returnedView = paletItems( position, row_element,  parent );
-            return returnedView;
-        }
-
         else if(OPERATION.equals("PALET_ICERIK_DETAY")){
             Log.d("PALET_ICERIK_DETAY", "ADAPTER GET VIEW CALLED... Pos: "+position);
             returnedView = paletIcerikleri( position, row_element,  parent );
             return returnedView;
         }
-
-
         else
             return row_element ;
     }
@@ -134,29 +131,6 @@ public class PaletAdapter extends ArrayAdapter {
         kodItemsHolder.yeniTani.setText(productModel.getYeniTanim());
         return  sentView;
     }
-    // PALET ITEMS
-    public View  paletItems(int position, View sentView, ViewGroup parent ) {
-        PaletItemsHolder paletItemsHolder;
-        if (sentView == null){
-            LayoutInflater layoutInflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            sentView = layoutInflater.inflate(R.layout.palet_items_list, parent, false);
-            paletItemsHolder = new PaletItemsHolder();
-            paletItemsHolder.urunBarkod = sentView.findViewById(R.id.urunBarkod);
-            paletItemsHolder.urunStokKodu = sentView.findViewById(R.id.urunStokKodu);
-            paletItemsHolder.ifsStokKodu = sentView.findViewById(R.id.ifsStokKodu);
-            paletItemsHolder.ifsStokTani = sentView.findViewById(R.id.ifsStokTani);
-            sentView.setTag(paletItemsHolder);
-        }else{
-            paletItemsHolder = (PaletItemsHolder) sentView.getTag();
-        }
-        // Call the helper class with the correspondent constructor
-        PaletItemsModel paletItemsModel = (PaletItemsModel) this.getItem(position);
-        paletItemsHolder.urunBarkod.setText(paletItemsModel.getUrunBarkod());
-        paletItemsHolder.urunStokKodu.setText(paletItemsModel.getUrunStokKodu());
-        paletItemsHolder.ifsStokKodu.setText(paletItemsModel.getIfsStokKodu());
-        paletItemsHolder.ifsStokTani.setText(paletItemsModel.getIfsStokTani());
-        return  sentView;
-    }
 
     // PALET ICERIKLERI
     public View  paletIcerikleri(int position, View sentView, ViewGroup parent ) {
@@ -170,8 +144,8 @@ public class PaletAdapter extends ArrayAdapter {
             paletIcerikDetayHolder.uru_Stok_Kodu = sentView.findViewById(R.id.uru_stok_kodu);
             paletIcerikDetayHolder.ifs_Stok_Kodu = sentView.findViewById(R.id.ifs_stok_kodu);
             paletIcerikDetayHolder.ifs_Stok_Tanimi = sentView.findViewById(R.id.ifs_stok_tani);
-//            paletIcerikDetayHolder._adet = sentView.findViewById(R.id._adet);
-//            paletIcerikDetayHolder.tarih = sentView.findViewById(R.id.tarih);
+            paletIcerikDetayHolder._adet = sentView.findViewById(R.id._adet);
+            paletIcerikDetayHolder.tarih = sentView.findViewById(R.id.tarih);
             sentView.setTag(paletIcerikDetayHolder);
         }else{
             paletIcerikDetayHolder = (PaletIcerikDetayHolder) sentView.getTag();
@@ -183,23 +157,29 @@ public class PaletAdapter extends ArrayAdapter {
         paletIcerikDetayHolder.uru_Stok_Kodu.setText(paletIcerikModel.getUru_Stok_Kodu());
         paletIcerikDetayHolder.ifs_Stok_Kodu.setText(paletIcerikModel.getIfs_Stok_Kodu());
         paletIcerikDetayHolder.ifs_Stok_Tanimi.setText(paletIcerikModel.getIfs_Stok_Tanimi());
-        paletIcerikDetayHolder._adet.setText(Integer.valueOf(paletIcerikModel.getAdet()));
+        paletIcerikDetayHolder._adet.setText(String.valueOf(paletIcerikModel.getAdet()));
         paletIcerikDetayHolder.tarih.setText(paletIcerikModel.getTarih());
-
         return  sentView;
     }
+
+
+
 
     // STATIC CLASS FOR VIEWS
     static class PaltlerHolder{
         TextView ifsID , tarih, kapalimi, barkod, cariUnvan, lref;
     }
+
     static class PaletItemsHolder{
         TextView urunBarkod, urunStokKodu,  ifsStokKodu,  ifsStokTani;
     }
+
     static class YeniKodItemsHolder{
         TextView yeniKod, yeniTani;
     }
+
     static class  PaletIcerikDetayHolder {
         TextView lRef, paletlerRef, uretimBarkodu, urunTipi, ifs_Stok_Kodu, ifs_Stok_Tanimi, _adet, transferredToIfs,  uru_Stok_Kodu, urunAdi, tarih, kullanicilarRef;
     }
+
 }

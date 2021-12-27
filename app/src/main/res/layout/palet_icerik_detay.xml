@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
-        <!-- IFS ID-->
+        <!-- BARKOD-->
         <TextView
             android:id="@+id/paletRef"
             android:layout_width="65sp"
@@ -18,6 +18,7 @@
             android:drawableLeft="@color/black"
             android:textSize="13sp"/>
 
+        <!-- URETIM BARKODU -->
         <TextView
             android:id="@+id/uretimBarkodu"
             android:layout_width="110sp"
@@ -27,7 +28,8 @@
             android:layout_toRightOf="@id/paletRef"
             android:text=""
             android:textSize="13sp" />
-<!--        uru_Stok_Sod-->
+
+        <!-- STOK KODU -->
         <TextView
             android:id="@+id/uru_stok_kodu"
             android:layout_width="100sp"
@@ -37,7 +39,8 @@
             android:layout_toRightOf="@id/uretimBarkodu"
             android:textSize="13sp"
             android:text=""/>
-<!--        ifs_Stok_Kodu-->
+
+        <!--  ifs_Stok_Kodu-->
         <TextView
             android:id="@+id/ifs_stok_kodu"
             android:layout_width="150sp"
@@ -47,6 +50,7 @@
             android:textSize="13sp"
             android:text=""/>
 <!--        ifs_Stok_tani-->
+
         <TextView
             android:id="@+id/ifs_stok_tani"
             android:layout_width="235sp"

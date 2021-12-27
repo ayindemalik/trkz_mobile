@@ -1,0 +1,57 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <!-- Urun STOK KODU-->
+        <TextView
+            android:id="@+id/uru_Stok_Kodu"
+            android:layout_width="100sp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="2dp"
+            android:text="U.Barkod"
+            android:drawableLeft="@color/black"
+            android:textSize="13sp"/>
+
+        <!-- IFS STOK KODU-->
+        <TextView
+            android:id="@+id/ifs_stok_kodu"
+            android:layout_width="150sp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/uru_Stok_Kodu"
+            android:layout_marginRight="2dp"
+            android:layout_toRightOf="@id/uru_Stok_Kodu"
+            android:text=""
+            android:textSize="13sp" />
+
+        <!-- IFS STOK TANI -->
+        <TextView
+            android:id="@+id/ifs_stok_tani"
+            android:layout_width="235sp"
+            android:layout_height="wrap_content"
+            android:padding="1sp"
+            android:maxLines="5"
+            android:layout_marginRight="3dp"
+            android:drawableLeft="@color/black"
+            android:layout_toRightOf="@id/ifs_stok_kodu"
+            android:textSize="11sp"
+            android:text=""/>
+        <!-- ADET -->
+
+        <TextView
+            android:id="@+id/_adet"
+            android:layout_width="40sp"
+            android:layout_height="wrap_content"
+            android:padding="1sp"
+            android:maxLines="5"
+            android:layout_marginRight="3dp"
+            android:layout_toRightOf="@id/ifs_stok_tani"
+            android:textSize="11sp"
+            android:text=""/>
+
+    </RelativeLayout>
+</LinearLayout>
