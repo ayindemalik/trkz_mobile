@@ -13,8 +13,8 @@
 
     <!-- TODO: Update blank fragment layout -->
     <com.makeramen.roundedimageview.RoundedImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:id="@+id/paketlemeHomeImage"
         android:layout_marginTop="20dp"
         android:layout_gravity="center"
@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/paketlemeHomeTitle"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:text="@string/paketlemeHomeMenuTitle"
         android:textAlignment="center"
         android:textColor="@color/teal_200"

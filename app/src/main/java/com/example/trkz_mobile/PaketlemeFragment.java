@@ -1,8 +1,10 @@
 package com.example.trkz_mobile;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -10,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.trkz_mobile.databinding.PaketlemeFragmentBinding;
 import com.example.trkz_mobile.databinding.SevkiyatFragmentBinding;
@@ -21,8 +24,12 @@ import com.example.trkz_mobile.databinding.SevkiyatFragmentBinding;
  */
 public class PaketlemeFragment extends Fragment {
     public PaketlemeFragmentBinding binding;
-    Button toPaketOlusturma;
-    Button toPaletketTab;
+    Button toPaletOlusturma, toTakimOlusturma;
+    Button toPaletketTab, btnPaletBul, btnPaletBoz;
+
+    AlertDialog dialog;
+    AlertDialog.Builder dialogBuilder;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -66,15 +73,9 @@ public class PaketlemeFragment extends Fragment {
         binding = PaketlemeFragmentBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        toPaketOlusturma = binding.paketMenuBtnPolsturma;
+        dialogBuilder =  new AlertDialog.Builder(getContext());
+
         toPaletketTab = binding.paketMenuBtnPaletlerTab;
-        toPaketOlusturma.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getContext(), PaletOlusturmaMenu.class);
-                startActivity(i);
-            }
-        });
         toPaletketTab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,7 +85,38 @@ public class PaketlemeFragment extends Fragment {
             }
         });
 
+        toPaletOlusturma = binding.paketMenuBtnPolsturma;
+        toPaletOlusturma.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getContext(), PaletOlusturmaMenu.class);
+                startActivity(i);
+            }
+        });
 
+//        paketMenuBtnTolsturma
+
+//        btnPaletBoz = ;
+        btnPaletBul = binding.paketMenuBtnPBulma;
+        btnPaletBul.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                operationDialog("Palet Bul");
+            }
+        });
         return root;
+    }
+
+    public void operationDialog(String opTitle){
+        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View customDialogView = inflater.inflate(R.layout.paketleme_operation_dialog, null, false);
+        TextView operationTitle = customDialogView.findViewById(R.id.operationTitle);
+            operationTitle.setText(opTitle);
+        Button operationButton = customDialogView.findViewById(R.id.operationButton);
+            operationButton.setText("Tamam");
+        dialogBuilder.setView(customDialogView);
+        dialog =  dialogBuilder.create();
+//        dialog.setTitle(opTitle);
+        dialog.show();
     }
 }

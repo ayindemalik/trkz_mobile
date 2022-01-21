@@ -1,6 +1,7 @@
 package com.example.trkz_mobile;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -31,10 +32,20 @@ import androidx.navigation.ui.NavigationUI;
 
 public class MainActivity extends AppCompatActivity {
     Intent intent;
+
+    SharedPreferences pref;
+
+    // Kulla
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        pref = getSharedPreferences("UserPreferences", 0);
+        int kullRef = pref.getInt("kullaniciRef", 0);
+        Log.d("preferenc", String.valueOf(kullRef));
+
         intent = getIntent();
         String iD;
 //        Intent getID = getIntent();

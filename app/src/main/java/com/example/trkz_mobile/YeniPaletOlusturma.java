@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -37,8 +38,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
 public class YeniPaletOlusturma extends AppCompatActivity {
+    SharedPreferences pref;
+    UserModel user;
     //    VARIABLES
     public YeniPaletOlusturmaBinding binding;
 //    Spinner ypFirmaAdi, ypPaletTipi, ypEtiket;
@@ -78,32 +80,23 @@ public class YeniPaletOlusturma extends AppCompatActivity {
         binding = YeniPaletOlusturmaBinding.inflate(getLayoutInflater());
         View root = binding.getRoot();
         setContentView(root);
+        pref = getSharedPreferences("UserPreferences", 0);
         // CASTING
-        // SPINNERS
-        ypFirmaAdi = binding.ypFirmaAdi;
-        ypPaletTipi = binding.ypPaletTipi;
-        ypEtiket = binding.ypEtiket;
-        //  EDITEX
-        ypUrunBarKodu = binding.ypUrunBarKodu;
-        ypUrunKodu = binding.ypUrunkodu;
-        ypUrunTani = binding.ypUrunTani;
-        ypUrunKodu.setEnabled(false);
-        ypUrunTani.setEnabled(false);
-        // Radio Group
-        ypKisaBoy = binding.ypKisaBoy;
-        ypAdet = binding.ypAdet;
-        // Buttons
-        ypBtnDevam = binding.ypBtnDevam;
+        setBindings();
+
+        setUserData(pref);
+
 //        customDropDownArrayAdapter = new CustomDropDownArrayAdapter(this, R.layout.yp_customers);
 //        pTcustomDropDownArrayAdapter = new CustomDropDownArrayAdapter()
 //        ypFirmaAdi.setAdapter(customDropDownArrayAdapter);
+        pref = getSharedPreferences("UserPreferences", 0);
+//        int kullRef = pref.getInt("kullaniciRef", 0);
+
         task = new BackgroudTask(this);
         BACKGROUND_ACTION = "loadCustomer";
         task.execute(BACKGROUND_ACTION);
 
         loadEtiket();
-
-        yes_noBuilder =  new AlertDialog.Builder(YeniPaletOlusturma.this);
 
         //
         ypFirmaAdi.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -171,6 +164,7 @@ public class YeniPaletOlusturma extends AppCompatActivity {
             }
         });
 
+        // PALET OLUSTURMA
         ypBtnDevam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -199,6 +193,7 @@ public class YeniPaletOlusturma extends AppCompatActivity {
                     displayDialog("Lütfen ürün adetini girin, 0 veya boş olamaz", "dataControl");
                     return;
                 }
+
                 urunKodu = ypUrunKodu.getText().toString();
                 if(etiketTipi.equals("Tek tipi") && urunKodu.equals("")){
 //                    yes_noBuilder.setMessage("Lütfen ürün barkodunu okutarak ürün kodudu bulun girin");
@@ -249,6 +244,47 @@ public class YeniPaletOlusturma extends AppCompatActivity {
             }
         });
 
+        Toast.makeText(getBaseContext(), "User data " + user.getKullaniciRef(), Toast.LENGTH_LONG);
+    }
+    public void setBindings(){
+        // SPINNERS
+        ypFirmaAdi = binding.ypFirmaAdi;
+        ypPaletTipi = binding.ypPaletTipi;
+        ypEtiket = binding.ypEtiket;
+        //  EDITEX
+        ypUrunBarKodu = binding.ypUrunBarKodu;
+        ypUrunKodu = binding.ypUrunkodu;
+        ypUrunTani = binding.ypUrunTani;
+        ypUrunKodu.setEnabled(false);
+        ypUrunTani.setEnabled(false);
+        // Radio Group
+        ypKisaBoy = binding.ypKisaBoy;
+        ypAdet = binding.ypAdet;
+        // Buttons
+        ypBtnDevam = binding.ypBtnDevam;
+
+        yes_noBuilder =  new AlertDialog.Builder(YeniPaletOlusturma.this);
+    }
+
+    public void setUserData(SharedPreferences pref){
+        user = new UserModel(
+                pref.getInt("kullaniciRef", 0),
+                pref.getInt("depoNo", 0),
+                pref.getInt("sevkDepoNo", 0),
+                pref.getInt("bolumNo", 0),
+                pref.getString("barkodOnEk", ""),
+                pref.getString("takimBarkodOnek", ""),
+                pref.getInt("barkodUzunluk", 0),
+                pref.getInt("takimEtiketID", 0),
+                pref.getString("takimEtiketPrinter", ""),
+                pref.getInt("paletEtiketID", 0),
+                pref.getInt("paletDetayliEtiketID", 0),
+                pref.getString("paletEtiketPrinter", ""),
+                pref.getString("yeniUretimBarkodOnEk", ""),
+                pref.getInt("cerabathEtiketID", 0),
+                pref.getString("locationNo", ""),
+                pref.getString("contract", "")
+        );
     }
 
     public void displayDialog(String body, String action){
@@ -302,7 +338,7 @@ public class YeniPaletOlusturma extends AppCompatActivity {
     }
 
     public void paletOlustur(){
-        int PaletRef_ = 0; int KullaniciRef_ = 0;
+        int PaletRef_ = 0; int KullaniciRef_ = user.getKullaniciRef();
         String cariKod_ = musteriID;
         String cariAdi_ = musteriAdi;
 
@@ -312,20 +348,24 @@ public class YeniPaletOlusturma extends AppCompatActivity {
 
         String PaletTipi_ = etiketTipi, SecilmisUrunKodu_ = urunKodu;
         int takimAdet_ = 0;
-        Boolean takimDetayli_ =false;
+        Boolean takimDetayli_ = false;
         int Adet_ = adet;
         Boolean hollandaDepoMu_ = false;
         String YeniKod_ = urunKodu, IfsHandlingUnitType_ = paletTuru, BarkodOnEk_ = "KY";
         int BarkodUzunluk_ = 10;
+        String kullaniciLocation_ =  user.getLocationNo();
 
         BackgroudTask task = new BackgroudTask(this);
-        task.execute("PALET_OLUSTUR", String.valueOf(PaletRef_),
-                String.valueOf(KullaniciRef_), cariKod_,  cariAdi_, String.valueOf(BoyMu_) ,
-                 PaletTipi_,  SecilmisUrunKodu_,  String.valueOf(takimAdet_),
-                String.valueOf(takimDetayli_), String.valueOf(Adet_), String.valueOf(hollandaDepoMu_) ,
-                YeniKod_, IfsHandlingUnitType_,  BarkodOnEk_,  String.valueOf(BarkodUzunluk_));
+        task.execute("PALET_OLUSTUR",
+            String.valueOf(PaletRef_),
+            String.valueOf(KullaniciRef_),
+            cariKod_,  cariAdi_, String.valueOf(BoyMu_) ,
+            PaletTipi_,  SecilmisUrunKodu_,  String.valueOf(takimAdet_),
+            String.valueOf(takimDetayli_), String.valueOf(Adet_), String.valueOf(hollandaDepoMu_) ,
+            YeniKod_, IfsHandlingUnitType_,  BarkodOnEk_,  String.valueOf(BarkodUzunluk_),
+            kullaniciLocation_);
     }
-
+    // Etiketler getirme
     void loadEtiket(){
 //        String[] etiketler = new String[]{"Turkuaz", "Logosuz", "Majestik", "Açık Ürün", "Ekonomik", "Karışık"};
         String[] etiketler = new String[]{"Palet tipi seç", "Tek tipi", "Karışık"};
@@ -335,6 +375,7 @@ public class YeniPaletOlusturma extends AppCompatActivity {
         ypEtiket.setAdapter(spinnerArrayAdapter);
     }
 
+    // Musterileri getirme
     void loadCustomer(ArrayList<CustomerModel> customerArrayList){
         customDropDownArrayAdapter = new CustomDropDownArrayAdapter(this, R.layout.yp_customers, customerArrayList);
         CustomDropDownArrayAdapter.ACTION = "FIRMALAR";
@@ -386,7 +427,6 @@ public class YeniPaletOlusturma extends AppCompatActivity {
             yeniKodListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Toast.makeText(getBaseContext(),  " Alert list item clicked " ,Toast.LENGTH_SHORT).show();
-
                     ProductModel productModel = (ProductModel) paletAdapter.getItem(position);
                     ypUrunKodu.setText(productModel.getYeniKodu());
                     ypUrunTani.setText(productModel.getYeniTanim());
@@ -464,26 +504,33 @@ public class YeniPaletOlusturma extends AppCompatActivity {
                 Log.d("HUnit RETURNED_PROD", result);
             }
             else if(ACTION.equals("PALET_OLUSTUR")){
-                int PaletRef_ = Integer.valueOf(params[1]); int KullaniciRef_ = Integer.valueOf(params[2]);
+                int PaletRef_ = Integer.valueOf(params[1]);
+                int KullaniciRef_ = Integer.valueOf(params[2]);
                 String cariKod_ = params[3], cariAdi_ = params[4];
                 Boolean BoyMu_ = Boolean.valueOf(params[5]);
                 String PaletTipi_ = params[6], SecilmisUrunKodu_ = params[7];
                 int takimAdet_ = Integer.valueOf(params[8]);
                 Boolean takimDetayli_ = Boolean.valueOf(params[9]);
                 int Adet_ = Integer.valueOf(params[10]);
-                Boolean hollandaDepoMu_ = Boolean.valueOf(params[11]); String YeniKod_ = params[12];
+                Boolean hollandaDepoMu_ = Boolean.valueOf(params[11]);
+                String YeniKod_ = params[12];
                 String IfsHandlingUnitType_ = params[13]; String BarkodOnEk_ = params[14];
-                int BarkodUzunluk_ = Integer.valueOf(params[15]);
-//                Log.d("P_OLUSTUR_PROP:", PaletRef_ +" -- " +KullaniciRef_ +" -- " +cariKod_
-//                        +" -- " +cariAdi_ +" -- " +BoyMu_ +" -- " +PaletTipi_ +" -- " +SecilmisUrunKodu_ +" -- " +takimAdet_
-//                        +" -- " +Adet_ +" -- " +hollandaDepoMu_ +" -- " +YeniKod_ +" -- " +IfsHandlingUnitType_ +" -- " +BarkodOnEk_
-//                        +" -- " +BarkodUzunluk_ );
-                result = service.paletOlustur(PaletRef_, KullaniciRef_, cariKod_, cariAdi_, BoyMu_, PaletTipi_, SecilmisUrunKodu_,
-                        takimAdet_, takimDetayli_, Adet_, hollandaDepoMu_, YeniKod_, IfsHandlingUnitType_, BarkodOnEk_,  BarkodUzunluk_);
+                int BarkodUzunluk_ = Integer.valueOf(params[15]); String kullaniciLocation = params[16];
+//
+                Log.d("P_OLUSTUR_PROP:", PaletRef_ +" -- " +KullaniciRef_ +" -- " +cariKod_
+                        +" -- " +cariAdi_ +" -- " +BoyMu_ +" -- " +PaletTipi_ +" -- " +SecilmisUrunKodu_
+                        +" -- " +takimAdet_ +" -- " +takimDetayli_
+                        +" -- " +Adet_ +" -- " +hollandaDepoMu_ +" -- " +YeniKod_ +" -- " +IfsHandlingUnitType_
+                        +" -- " +BarkodOnEk_ +" -- " +BarkodUzunluk_ +" -- " +kullaniciLocation );
+                result = service.paletOlustur(
+                        PaletRef_, KullaniciRef_, cariKod_, cariAdi_, BoyMu_, PaletTipi_,
+                        SecilmisUrunKodu_, takimAdet_, takimDetayli_, Adet_, hollandaDepoMu_,
+                        YeniKod_, IfsHandlingUnitType_, BarkodOnEk_, BarkodUzunluk_, kullaniciLocation);
                 Log.d("P OLUSTUR RESULT", result);
             }
             return null;
         }
+
         @Override
         protected void onPostExecute(String result2) {
             if (ACTION.equals("loadCustomer")) {
@@ -500,7 +547,8 @@ public class YeniPaletOlusturma extends AppCompatActivity {
             else if(ACTION.equals("PALET_OLUSTUR")){
 //                displayDialog(result, "dataControl");
                  paletLrf = parsePaletXmlResult(result);
-                 if(!paletLrf.equals(null) || paletLrf.equals("") ){
+                 Log.d("PALET_OLUSTUR_BACK", paletLrf);
+                 if(!paletLrf.equals(null) || !paletLrf.equals("") ){
                      displayDialog(paletLrf + " nolu LRF olan bir paleti başarıyla oluşturulmuştur."
                              +" \"Tamam\" tıklayarak palete ürünleri eklemek için sonraki sayfaya yönlendireceksiniz.", "olusturDevam");
                  }

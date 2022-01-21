@@ -242,7 +242,7 @@ public class MobileService {
     public String paletOlustur(int PaletRef_, int KullaniciRef_, String cariKod_, String cariAdi_, Boolean BoyMu_,
                                String PaletTipi_, String SecilmisUrunKodu_, int takimAdet_,
                                Boolean takimDetayli_, int Adet_, Boolean hollandaDepoMu_, String YeniKod_,
-                               String IfsHandlingUnitType_, String BarkodOnEk_, int BarkodUzunluk_){
+                               String IfsHandlingUnitType_, String BarkodOnEk_, int BarkodUzunluk_, String kullaniciLocation){
         String data ="";
         SoapObject service_ = new SoapObject(NAMESPACE,PALET_OLUSTUR_TYPE_METHOD);
         service_.addProperty("PaletRef_",PaletRef_);
@@ -260,6 +260,7 @@ public class MobileService {
         service_.addProperty("IfsHandlingUnitType_",IfsHandlingUnitType_);
         service_.addProperty("BarkodOnEk_",BarkodOnEk_);
         service_.addProperty("BarkodUzunluk_",BarkodUzunluk_);
+        service_.addProperty("KullaniciLocation_", kullaniciLocation);
 //        PaletRef_,
 //                KullaniciRef_,
 //                cariKod_,
@@ -375,4 +376,89 @@ public class MobileService {
         return data;
     }
 
+    // GIRIS GETIR
+    final String GIRIS_METHOD = "Get_User";
+    final String GIRIS_METHOD_SOAP_ACTION = "http://tempuri.org/Get_User";
+//    public String getUser(String user_name_){
+//        String data ="";
+//        SoapObject service_ = new SoapObject(NAMESPACE,GIRIS_METHOD);
+//        service_.addProperty("user_name_", user_name_);
+//        service_.addProperty("password_", "");
+//
+//        SoapSerializationEnvelope env_ = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+//        env_.setOutputSoapObject(service_);
+//        env_.dotNet = true;
+//        try {
+//            httpTransportSE = new HttpTransportSE(URL);
+//            httpTransportSE.setXmlVersionTag("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
+//            httpTransportSE.debug = true;
+//            httpTransportSE.call(GIRIS_METHOD_SOAP_ACTION,env_);
+//            data = httpTransportSE.responseDump;
+//            if (data!=null) return  data;
+//            else return "No data Found";
+//        }
+//        catch (Exception ex){ ex.printStackTrace(); }
+//        return data;
+//    }
+
+    public String getUser(String user_name_){
+        String data ="";
+        setRequirements("Get_User", "http://tempuri.org/Get_User");
+        service_.addProperty("user_name_", user_name_);
+        service_.addProperty("password_", "");
+        try {
+            httpTransportSE = new HttpTransportSE(URL);
+            httpTransportSE.setXmlVersionTag("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
+            httpTransportSE.debug = true;
+            httpTransportSE.call(this.soapAction, this.env_);
+            data = httpTransportSE.responseDump;
+            if (data!=null)  return  data;
+            else return "No data Found";
+        }
+        catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return data;
+    }
+
+    String soapAction, soapMethod;
+    SoapSerializationEnvelope env_;
+    SoapObject service_;
+    public void setRequirements(String soapMethod, String soapAction){
+        this.soapAction = soapAction; this.soapMethod = soapMethod;
+        this.service_ = new SoapObject(NAMESPACE,this.soapMethod);
+        this.env_ = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+        this.env_.setOutputSoapObject(this.service_);
+        this.env_.dotNet = true;
+    }
+
+    public String UrunEklemeKontrol(String urunBarkod_, String PaletRef_, String CariKod_,
+                                    String PaletTipi_, String SecilmisEskiKod_, String YeniKod_,
+                                    String YeniTanim_, String HataMesaji_){
+        String data ="";
+        setRequirements("UrunEklemeKontrol", "http://tempuri.org/UrunEklemeKontrol");
+        this.service_.addProperty("urunBarkod_", urunBarkod_);
+        this.service_.addProperty("PaletRef_", PaletRef_);
+        this.service_.addProperty("CariKod_", CariKod_);
+        this.service_.addProperty("PaletTipi_", PaletTipi_);
+        this.service_.addProperty("SecilmisEskiKod_", SecilmisEskiKod_);
+        this.service_.addProperty("YeniKod_", YeniKod_);
+        this.service_.addProperty("YeniTanim_", YeniTanim_);
+        this.service_.addProperty("HataMesaji_", HataMesaji_);
+
+        try {
+            httpTransportSE = new HttpTransportSE(URL);
+            httpTransportSE.setXmlVersionTag("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
+            httpTransportSE.debug = true;
+            httpTransportSE.call(this.soapAction,env_);
+            data = httpTransportSE.responseDump;
+            if (data!=null)
+            { return  data;}
+            else{ return "No data Found";}
+        }
+        catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return data;
+    }
 }

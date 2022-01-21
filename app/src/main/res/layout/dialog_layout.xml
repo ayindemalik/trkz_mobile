@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".YeniPaletOlusturmaDevam">
+
+        <!-- TITLE-->
+        <TextView
+            android:id="@+id/operationTitle"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Title"
+            android:textStyle="bold"
+
+            android:textSize="20dp"
+            android:textColor="@color/white"
+            android:background = "@color/colorPrimary"
+            android:gravity="center"
+            android:textAlignment="center"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_below="@+id/operationTitle"
+            android:layout_marginTop="15sp"
+            android:id="@+id/header">
+
+            <TextView
+                android:id="@+id/dialogContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10sp"
+                android:layout_marginTop="10sp"
+                android:layout_marginEnd="10sp"
+                android:layout_marginBottom="10sp"
+                android:gravity="center"
+                android:padding="10sp"
+                android:text="Message"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="17dp"
+                android:maxLines="10"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_below="@+id/header"
+            android:gravity="center"
+            android:layout_marginTop="15sp">
+
+            <Button
+                android:id="@+id/noButton"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_marginHorizontal="26dp"
+                android:background="@color/purple_200"
+                android:text="Hayir"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
+            <Button
+                android:id="@+id/yesButton"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_marginHorizontal="26dp"
+                android:textColor="@color/white"
+                android:layout_toRightOf="@id/noButton"
+                android:background = "@color/colorPrimary"
+                android:textSize="20dp"
+                android:text="Tamam" />
+        </RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </RelativeLayout>
+
+</LinearLayout>
