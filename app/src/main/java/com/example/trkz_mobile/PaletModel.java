@@ -1,89 +1,23 @@
 package com.example.trkz_mobile;
 
 public class PaletModel {
-    private String ifsID;
-    private String tarih;
-    private String kapalimi;
+    //    PALET LISTESI ICIN
+    private int ifsID;
+    //    private String tarih;
+    private String skapalimi;
     private String barkod;
-    private String cariUnvan;
-    private String lref;
-
-    public PaletModel(String ifsID, String tarih, String kapalimi, String barkod, String cariUnvan, String lref) {
-        this.ifsID = ifsID;
-        this.tarih = tarih;
-        this.kapalimi = kapalimi;
-        this.barkod = barkod;
-        this.cariUnvan = cariUnvan;
-        this.lref = lref;
-    }
-
-    public String getIfsID() {
-        return ifsID;
-    }
-
-    public void setIfsID(String ifsID) {
-        this.ifsID = ifsID;
-    }
-
-    public String getTarih() {
-        return tarih;
-    }
-
-    public void setTarih(String tarih) {
-        this.tarih = tarih;
-    }
-
-    public String getKapalimi() {
-        return kapalimi;
-    }
-
-    public void setKapalimi(String kapalimi) {
-        this.kapalimi = kapalimi;
-    }
-
-    public String getBarkod() {
-        return barkod;
-    }
-
-    public void setBarkod(String barkod) {
-        this.barkod = barkod;
-    }
-
-    public String getCariUnvan() {
-        return cariUnvan;
-    }
-
-    public void setCariUnvan(String cariUnvan) {
-        this.cariUnvan = cariUnvan;
-    }
-
-    public String getLref() {
-        return lref;
-    }
-
-    public void setLref(String lref) {
-        this.lref = lref;
-    }
-
-    @Override
-    public String toString(){
-        return " ifsID: "+ getIfsID()+
-                "\n tarih: "+ getTarih()+ "  kapalimi :"+getKapalimi()+
-                "\n barkod: "+ getBarkod()+
-                "\n cariUnvan: "+ getCariUnvan()+
-                "\n lref: "+ getLref();
-    }
+    //    private String cariUnvan;
+    private int lref;
 
     // PALET BILGILERI
-    private String IfsHandlingUnitId;
-    private String pLRef;
-    private String pBarkod;
+    private int IfsHandlingUnitId;
     private String cari_kod;
     private String cari_unvan1;
     private Boolean AktifMi; //  true
     private Boolean KapaliMi; // true
     private String Etiketi; //Karışık
     private String uru_stok_kod; // 9SC1301001
+    private String UrunAdi; // 9SC1301001
     private String IfsKodu; //SC00601S50002931
     private String IfsHandlingUnitType; //X
     private int PaletAdet ; // 0
@@ -96,44 +30,131 @@ public class PaletModel {
     private String Tarih; // 2021-03-20T02:16:48.443+03:00
     private String KapanmaTarihi; // 2021-03-20T02:22:32.43+03:00
 
-    public PaletModel(String ifsHandlingUnitId, String LRef, String barkod, String cari_kod, String cari_unvan1, Boolean aktifMi, Boolean kapaliMi, String etiketi, String uru_stok_kod, String ifsKodu, String ifsHandlingUnitType, int paletAdet, int takimAdet, String icerikDurumu, Boolean boyMu, Boolean takimDetayliMi, Boolean hollandaDepoMu, String kullanicilarRef, String tarih, String kapanmaTarihi) {
-        IfsHandlingUnitId = ifsHandlingUnitId;
+    public PaletModel(int ifsID, String tarih, String kapalimi, String barkod, String cariUnvan, int lref) {
+        this.ifsID = ifsID;
+        this.Tarih = tarih;
+        this.skapalimi = kapalimi;
+        this.barkod = barkod;
+        this.cari_unvan1 = cariUnvan;
+        this.lref = lref;
+    }
+
+    public int getIfsID() {
+        return ifsID;
+    }
+
+    public void setIfsID(int ifsID) {
+        this.ifsID = ifsID;
+    }
+
+    public String getTarih() {
+        return Tarih;
+    }
+
+    public void setTarih(String tarih) {
+        this.Tarih = tarih;
+    }
+
+    public String getSKapalimi() {
+        return skapalimi;
+    }
+
+    public void setSKapalimi(String kapalimi) {
+        this.skapalimi = kapalimi;
+    }
+
+    public String getBarkod() {
+        return barkod;
+    }
+
+    public void setBarkod(String barkod) {
+        this.barkod = barkod;
+    }
+
+//    public String getCariUnvan() {
+//        return cariUnvan;
+//    }
+//
+//    public void setCariUnvan(String cariUnvan) {
+//        this.cariUnvan = cariUnvan;
+//    }
+
+    public int getLref() {
+        return lref;
+    }
+
+    public void setLref(int lref) {
+        this.lref = lref;
+    }
+
+    @Override
+    public String toString(){
+        return " ifsID: "+ getIfsID()+
+                "\n tarih: "+ getTarih()+
+                "\n barkod: "+ getBarkod()+
+                "\n cariUnvan1: "+ getCari_unvan1()+
+                "\n lref: "+ getLref()+
+                "\n AktifMi: "+ getAktifMi()+
+                "\n sKapalimi: "+ String.valueOf(getSKapalimi())+
+                "\n Kapalimi: "+ getKapaliMi()+
+                "\n Etiketi: "+ getEtiketi()+
+                "\n uru_stok_kod: "+ getUru_stok_kod()+
+                "\n urun adi: "+ getUrunAdi()+
+                "\n IfsKodu: "+ getIfsKodu()+
+                "\n IfsHandlingUnitType: "+ getIfsHandlingUnitType()+
+                "\n IfsHandlingUnitId: "+ getIfsHandlingUnitId()+
+                "\n PaletAdet: "+ getPaletAdet()+
+                "\n TakimAdet: "+ getTakimAdet()+
+                "\n IcerikDurumu: "+ getIcerikDurumu()+
+                "\n TakimDetayliMi: "+ getTakimDetayliMi()+
+                "\n KullanicilarRef: "+ getKullanicilarRef()+
+                "\n KapanmaTarihi: "+ getKapanmaTarihi();
+    }
+
+    public PaletModel(int ifsHandlingUnitId, int LRef, String barkod, String cari_kod,
+                      String cari_unvan1, Boolean aktifMi, Boolean kapaliMi,
+                      String etiketi, String uru_stok_kod, String urunAdi, String ifsKodu,
+                      String ifsHandlingUnitType, int paletAdet, int takimAdet, String icerikDurumu,
+                      Boolean boyMu, Boolean takimDetayliMi, Boolean hollandaDepoMu,
+                      String kullanicilarRef, String tarih, String kapanmaTarihi) {
+        this.IfsHandlingUnitId = ifsHandlingUnitId;
         this.lref = LRef;
         this.barkod = barkod;
         this.cari_kod = cari_kod;
         this.cari_unvan1 = cari_unvan1;
-        AktifMi = aktifMi;
-        KapaliMi = kapaliMi;
-        Etiketi = etiketi;
+        this.AktifMi = aktifMi;
+        this.KapaliMi = kapaliMi;
+        this.Etiketi = etiketi;
         this.uru_stok_kod = uru_stok_kod;
-        IfsKodu = ifsKodu;
-        IfsHandlingUnitType = ifsHandlingUnitType;
-        PaletAdet = paletAdet;
-        TakimAdet = takimAdet;
-        IcerikDurumu = icerikDurumu;
-        BoyMu = boyMu;
-        TakimDetayliMi = takimDetayliMi;
-        HollandaDepoMu = hollandaDepoMu;
-        KullanicilarRef = kullanicilarRef;
-        Tarih = tarih;
-        KapanmaTarihi = kapanmaTarihi;
+        this.UrunAdi = UrunAdi;
+        this.IfsKodu = ifsKodu;
+        this.IfsHandlingUnitType = ifsHandlingUnitType;
+        this.PaletAdet = paletAdet;
+        this.TakimAdet = takimAdet;
+        this.IcerikDurumu = icerikDurumu;
+        this.BoyMu = boyMu;
+        this.TakimDetayliMi = takimDetayliMi;
+        this.HollandaDepoMu = hollandaDepoMu;
+        this.KullanicilarRef = kullanicilarRef;
+        this.Tarih = tarih;
+        this.KapanmaTarihi = kapanmaTarihi;
     }
 
-    public String getIfsHandlingUnitId() {
+    public int getIfsHandlingUnitId() {
         return IfsHandlingUnitId;
     }
 
-    public void setIfsHandlingUnitId(String ifsHandlingUnitId) {
+    public void setIfsHandlingUnitId(int ifsHandlingUnitId) {
         IfsHandlingUnitId = ifsHandlingUnitId;
     }
 
-    public String getPLRef() {
-        return pLRef;
-    }
-
-    public void setPLRef(String LRef) {
-        this.pLRef = LRef;
-    }
+//    public String getPLRef() {
+//        return pLRef;
+//    }
+//
+//    public void setPLRef(String LRef) {
+//        this.pLRef = LRef;
+//    }
 
     public String getCari_kod() {
         return cari_kod;
@@ -181,6 +202,14 @@ public class PaletModel {
 
     public void setUru_stok_kod(String uru_stok_kod) {
         this.uru_stok_kod = uru_stok_kod;
+    }
+
+    public String getUrunAdi() {
+        return UrunAdi;
+    }
+
+    public void setUrunAdi(String urunAdi) {
+        UrunAdi = urunAdi;
     }
 
     public String getIfsKodu() {
@@ -262,6 +291,5 @@ public class PaletModel {
     public void setKapanmaTarihi(String kapanmaTarihi) {
         KapanmaTarihi = kapanmaTarihi;
     }
-
 
 }

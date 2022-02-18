@@ -66,7 +66,7 @@ public class PaletAdapter extends ArrayAdapter {
         View returnedView;
         // Mehodos from here
         if (OPERATION.equals("PALETLER")){
-            Log.d("ADAPTER_CALLED", "ADAPTER GET VIEW CALLED... Pos: "+position);
+//            Log.d("ADAPTER_CALLED", "ADAPTER GET VIEW CALLED... Pos: "+position);
             returnedView = AllPalets( position, row_element,  parent );
             return returnedView;
         }
@@ -77,7 +77,7 @@ public class PaletAdapter extends ArrayAdapter {
         }
 
         else if(OPERATION.equals("PALET_ICERIK_DETAY")){
-            Log.d("PALET_ICERIK_DETAY", "ADAPTER GET VIEW CALLED... Pos: "+position);
+//            Log.d("PALET_ICERIK_DETAY", "ADAPTER GET VIEW CALLED... Pos: "+position);
             returnedView = paletIcerikleri( position, row_element,  parent );
             return returnedView;
         }
@@ -104,12 +104,12 @@ public class PaletAdapter extends ArrayAdapter {
         }
         // Call the helper class with the correspondent constructor
         PaletModel paletModel = (PaletModel) this.getItem(position);
-        paltlerHolder.ifsID.setText(paletModel.getIfsID());
+        paltlerHolder.ifsID.setText(String.valueOf(paletModel.getIfsID()));
         paltlerHolder.tarih.setText(paletModel.getTarih());
-        paltlerHolder.kapalimi.setText(paletModel.getKapalimi());
+        paltlerHolder.kapalimi.setText(String.valueOf(paletModel.getSKapalimi()));
         paltlerHolder.barkod.setText(paletModel.getBarkod());
-        paltlerHolder.cariUnvan.setText(paletModel.getCariUnvan());
-        paltlerHolder.lref.setText(paletModel.getLref());
+        paltlerHolder.cariUnvan.setText(paletModel.getCari_unvan1());
+        paltlerHolder.lref.setText(String.valueOf(paletModel.getLref()));
         return  sentView;
     }
     // PALET ITEMS
@@ -161,8 +161,6 @@ public class PaletAdapter extends ArrayAdapter {
         paletIcerikDetayHolder.tarih.setText(paletIcerikModel.getTarih());
         return  sentView;
     }
-
-
 
 
     // STATIC CLASS FOR VIEWS

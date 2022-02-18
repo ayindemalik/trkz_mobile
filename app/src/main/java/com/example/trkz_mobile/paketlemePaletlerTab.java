@@ -68,52 +68,52 @@ public class paketlemePaletlerTab extends Fragment {
         return root;
     }
 
-    public void loadPaletler(String json_string){
-        try {
-//            JO = new JSONObject(json_string);
-//            jsonArray = new JSONArray(JO);
-            jsonArray = new JSONArray(json_string);
-            Log.d("JSON_ArrayTotal->",  ""+jsonArray.length());
-
-            int count = 0;
-            String ifsID, tarih, kapalimi, barkod,  cariUnvan,  lref;
-            while(count < jsonArray.length()){
-//                 JO = jsonArray.getJSONObject(count);
-//                ifsID = JO.getString("IfsId");
-//                tarih = JO.getString("Tarih");
-//                kapalimi = JO.getString("KapaliMi");
-//                barkod = JO.getString("Barkod");
-//                cariUnvan = JO.getString("CariUnvan");
-                ifsID = jsonArray.getJSONObject(count).getString("IfsId");
-                tarih = jsonArray.getJSONObject(count).getString("Tarih");
-                kapalimi = jsonArray.getJSONObject(count).getString("KapaliMi");
-                barkod = jsonArray.getJSONObject(count).getString("Barkod");
-                cariUnvan = jsonArray.getJSONObject(count).getString("CariUnvan");
-                lref = jsonArray.getJSONObject(count).getString("LRef");
-
-                Log.d("JSON DATA",  "Palet ["+count+"] -> ifsID : "+ ifsID
-                        +" tarih: " + tarih
-                        +" kapalimi : "+ kapalimi
-                        + " barkod:" + barkod
-                        + " cariUnvan: "+ cariUnvan
-                        + " lref: "+ lref
-                        );
-                PaletModel paletModel = new PaletModel(ifsID, tarih, kapalimi, barkod, cariUnvan, lref);
-                Log.d("MODEL DATA::", paletModel.toString());
-                PaletAdapter.OPERATION = "PALETLER";
-                paletAdapter.add(paletModel);
-                count++;
-            }
-//                "IfsId":"89040",
-//                "Tarih":"27.11.2021 09:31:06",
-//                "KapaliMi":"E",
-//                "Barkod":"KY000244851",
-//                "CariUnvan":"ZAHRAT AL KARMEL FOR TRADING",
-//                "LRef":"244851"
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
+//    public void loadPaletler(String json_string){
+//        try {
+////            JO = new JSONObject(json_string);
+////            jsonArray = new JSONArray(JO);
+//            jsonArray = new JSONArray(json_string);
+//            Log.d("JSON_ArrayTotal->",  ""+jsonArray.length());
+//
+//            int count = 0;
+//            String ifsID, tarih, kapalimi, barkod,  cariUnvan,  lref;
+//            while(count < jsonArray.length()){
+////                 JO = jsonArray.getJSONObject(count);
+////                ifsID = JO.getString("IfsId");
+////                tarih = JO.getString("Tarih");
+////                kapalimi = JO.getString("KapaliMi");
+////                barkod = JO.getString("Barkod");
+////                cariUnvan = JO.getString("CariUnvan");
+//                ifsID = jsonArray.getJSONObject(count).getString("IfsId");
+//                tarih = jsonArray.getJSONObject(count).getString("Tarih");
+//                kapalimi = jsonArray.getJSONObject(count).getString("KapaliMi");
+//                barkod = jsonArray.getJSONObject(count).getString("Barkod");
+//                cariUnvan = jsonArray.getJSONObject(count).getString("CariUnvan");
+//                lref = jsonArray.getJSONObject(count).getString("LRef");
+//
+//                Log.d("JSON DATA",  "Palet ["+count+"] -> ifsID : "+ ifsID
+//                        +" tarih: " + tarih
+//                        +" kapalimi : "+ kapalimi
+//                        + " barkod:" + barkod
+//                        + " cariUnvan: "+ cariUnvan
+//                        + " lref: "+ lref
+//                        );
+//                PaletModel paletModel = new PaletModel(ifsID, tarih, kapalimi, barkod, cariUnvan, lref);
+//                Log.d("MODEL DATA::", paletModel.toString());
+//                PaletAdapter.OPERATION = "PALETLER";
+//                paletAdapter.add(paletModel);
+//                count++;
+//            }
+////                "IfsId":"89040",
+////                "Tarih":"27.11.2021 09:31:06",
+////                "KapaliMi":"E",
+////                "Barkod":"KY000244851",
+////                "CariUnvan":"ZAHRAT AL KARMEL FOR TRADING",
+////                "LRef":"244851"
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     // Class
     public class PaletlerTask extends AsyncTask {
@@ -164,27 +164,23 @@ public class paketlemePaletlerTab extends Fragment {
             xmlPullParser.setInput(IOUtils.toInputStream(result_),"utf-8");
             int event = xmlPullParser.getEventType();
             Boolean ifsIDBool = false, tarihBool = false, kapalimiBool = false, barkodBool = false,  cariUnvanBool = false,  lrefBool = false;
-            String ifsID = "", tarih ="", kapalimi ="", barkod ="",  cariUnvan="",  lref="";
+            int ifsID = 0, lref = 0 ;
+            String tarih ="", barkod ="",  cariUnvan="";
+            String kapalimi = "";
             int count = 0;
             while (event != xmlPullParser.END_DOCUMENT)
             {
                 if ( event == xmlPullParser.START_TAG){
-                    if(xmlPullParser.getName().equals("IfsId"))
-                        ifsIDBool =true;
-                    if(xmlPullParser.getName().equals("Tarih"))
-                        tarihBool =true;
-                    if(xmlPullParser.getName().equals("KapaliMi"))
-                        kapalimiBool =true;
-                    if(xmlPullParser.getName().equals("Barkod"))
-                        barkodBool =true;
-                    if(xmlPullParser.getName().equals("cari_unvan1"))
-                        cariUnvanBool =true;
-                    if(xmlPullParser.getName().equals("LRef"))
-                        lrefBool =true;
+                    if(xmlPullParser.getName().equals("IfsId"))  ifsIDBool =true;
+                    if(xmlPullParser.getName().equals("Tarih")) tarihBool =true;
+                    if(xmlPullParser.getName().equals("KapaliMi")) kapalimiBool =true;
+                    if(xmlPullParser.getName().equals("Barkod")) barkodBool =true;
+                    if(xmlPullParser.getName().equals("cari_unvan1")) cariUnvanBool =true;
+                    if(xmlPullParser.getName().equals("LRef")) lrefBool =true;
                 }
                 if(event == xmlPullParser.TEXT){ // IfsId
                     if(ifsIDBool){
-                        ifsID = xmlPullParser.getText();
+                        ifsID = Integer.valueOf(xmlPullParser.getText());
                         ifsIDBool=false;
                     }
                 }
@@ -214,32 +210,26 @@ public class paketlemePaletlerTab extends Fragment {
                 }
                 if(event == xmlPullParser.TEXT){ // LRef
                     if(lrefBool){
-                        lref = xmlPullParser.getText();
+                        lref = Integer.valueOf(xmlPullParser.getText());
                         lrefBool=false;
                     }
                 }
-                if (ifsID != "" && barkod != "" && lref != ""){
+                if (ifsID != 0 && barkod != "" && lref != 0){
                     count++;
                     PaletModel paletModel = new PaletModel(ifsID, tarih, kapalimi, barkod, cariUnvan, lref);
                     paletlerArrayList.add(paletModel);
                     Log.d("MODEL DATA::", paletModel.toString());
                     PaletAdapter.OPERATION = "PALETLER";
                     paletAdapter.add(paletModel);
-                    ifsID = ""; tarih =""; kapalimi =""; barkod ="";  cariUnvan="";  lref="";
+                    ifsID = 0; tarih =""; kapalimi = ""; barkod ="";  cariUnvan="";  lref=0;
                 }
                 if(event == xmlPullParser.END_TAG){
-                    if(xmlPullParser.getName().equals("IfsId"))
-                        ifsIDBool =false;
-                    if(xmlPullParser.getName().equals("Tarih"))
-                        tarihBool =false;
-                    if(xmlPullParser.getName().equals("KapaliMi"))
-                        kapalimiBool =false;
-                    if(xmlPullParser.getName().equals("Barkod"))
-                        barkodBool =false;
-                    if(xmlPullParser.getName().equals("cari_unvan1"))
-                        cariUnvanBool =false;
-                    if(xmlPullParser.getName().equals("LRef"))
-                        lrefBool =false;
+                    if(xmlPullParser.getName().equals("IfsId")) ifsIDBool =false;
+                    if(xmlPullParser.getName().equals("Tarih")) tarihBool =false;
+                    if(xmlPullParser.getName().equals("KapaliMi")) kapalimiBool =false;
+                    if(xmlPullParser.getName().equals("Barkod")) barkodBool =false;
+                    if(xmlPullParser.getName().equals("cari_unvan1")) cariUnvanBool =false;
+                    if(xmlPullParser.getName().equals("LRef")) lrefBool =false;
                 }
                 event = xmlPullParser.next();
             }

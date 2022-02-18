@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,12 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.util.ArrayList;
+
+import java.text.SimpleDateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
 
 public class Giris extends AppCompatActivity {
 
@@ -36,6 +43,12 @@ public class Giris extends AppCompatActivity {
     AlertDialog dialog;
     AlertDialog.Builder dialogBuilder;
 
+    public static final String DATE_FORMAT_8 = "yyyy-MM-dd HH:mm:ss";
+
+    String dateTime;
+    Calendar calendar;
+    SimpleDateFormat simpleDateFormat;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +61,17 @@ public class Giris extends AppCompatActivity {
         editor = preferences.edit();
 
         dialogBuilder =  new AlertDialog.Builder(this);
+
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT_8);
+        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        Date today = Calendar.getInstance().getTime();
+        Log.d("TODAY_DATE", today.toString());
+
+        calendar = Calendar.getInstance();
+        simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss ");
+        dateTime = simpleDateFormat.format(calendar.getTime()).toString();
+        Log.d("TODAY_DATE2", dateTime);
 
         if(preferences.contains("kallaniciAdi")){
             Intent anaMenu = new Intent(Giris.this,MainActivity.class);
@@ -65,16 +89,18 @@ public class Giris extends AppCompatActivity {
 //                    anaMenu.putExtra("ID", kullaniciID.getText().toString());
 //                    startActivity(anaMenu);
                     BackgroudTask task = new BackgroudTask(getBaseContext());
-//                    BACKGROUND_ACTION = "getProductData";
                     task.execute("GIRIS", kullaniciAdi);
                 }
             });
         }
-    }
 
-//    public void setUserData(){
-//        UserModel user
-//    }
+        if (android.os.Build.VERSION.SDK_INT > 9)
+        {
+            StrictMode.ThreadPolicy policy = new
+            StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
+    }
 
     public void operationDialog(String opTitle, String message, Boolean noBtn, String noBtnText, Boolean yesBtn, String yesBtnText){
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -112,7 +138,7 @@ public class Giris extends AppCompatActivity {
         int cerabathEtiketID = 0;
         String locationNo = "", contract = "";
         if(!userList.isEmpty()){
-            Toast.makeText(getBaseContext(),   " Giris Basarili User Data Size" + userList.size(),Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getBaseContext(),   " Giris Basarili User Data Size" + userList.size(),Toast.LENGTH_SHORT).show();
             String all_data = "";
 //            if(userList.size() == 1){
                 for(int i = 0; i<userList.size(); i++){
@@ -155,12 +181,6 @@ public class Giris extends AppCompatActivity {
                 Intent anaMenu = new Intent(Giris.this,MainActivity.class);
                 anaMenu.putExtra("ID", kullaniciID.getText().toString());
                 startActivity(anaMenu);
-                all_data = all_data +
-                        "* " +kullaniciRef + " * " +depoNo
-                        + "* " +  sevkDepoNo + " * " +  bolumNo
-                        + " * " +  barkodOnEk;
-                Toast.makeText(getBaseContext(), all_data,Toast.LENGTH_SHORT).show();
-//            }
         }
         else {
             Toast.makeText(getBaseContext(),   "Giris Basarisiz, Bilgileri kontrol ederek deneyiniz",Toast.LENGTH_SHORT).show();
@@ -192,7 +212,7 @@ public class Giris extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result2) {
             if (ACTION.equals("GIRIS")) {
-                Log.d("GIRISR_ESULT :", result);
+//                Log.d("GIRISR_ESULT :", result);
                 ArrayList<UserModel> userList = KullaniciXMLParse(result);
                 setUserData(userList);
             }
@@ -221,28 +241,6 @@ public class Giris extends AppCompatActivity {
                 String paletEtiketPrinter = "", yeniUretimBarkodOnEk = "";
                 int cerabathEtiketID = 0;
                 String locationNo = "", contract = "";
-//                private int kullaniciRef ; //183</KullaniciRef>
-//                private int depoNo; // >1</DepoNo>
-//                private int sevkDepoNo; // >2</SevkDepoNo>
-//                private int bolumNo; //>42</BolumNo>
-//                private String barkodOnEk; //>KY</BarkodOnEk>
-//                private String takimBarkodOnek ; //>TY</TakimBarkodOnek>
-//                private int barkodUzunluk; // >10</BarkodUzunluk>
-//                private int takimEtiketID ; //>81</TakimEtiketID>
-//                private String takimEtiketPrinter; //>Takim1</TakimEtiketPrinter>
-//                private int paletEtiketID; //>77</PaletEtiketID>
-//                private int paletDetayliEtiketID; // >83</PaletDetayliEtiketID>
-//                private String paletEtiketPrinter; //>Palet1</PaletEtiketPrinter>
-//                private String yeniUretimBarkodOnEk ;// >CK</YeniUretimBarkodOnEk>
-//                private int cerabathEtiketID; //>97</CerabathEtiketID>
-//                private String locationNo; //>M020</LocationNo>
-//                private String contract; //>MRK</Contract>
-
-//                kullaniciRefBool = false, depoNoBool = false, sevkDepoNoBool = false, bolumNoBool = false,
-//                        barkodOnEkBool = false, takimBarkodOnekBool = false, barkodUzunlukBool = false,
-//                        takimEtiketIDBool = false, takimEtiketPrinterBool = false, paletEtiketIDBool = false,
-//                        paletDetayliEtiketIDBool = false, paletEtiketPrinterBool = false, yeniUretimBarkodOnEkBool = false,
-//                        cerabathEtiketIDBool = false, locationNoBool = false, contractBool = false;
                 while (event != xmlPullParser.END_DOCUMENT)
                 {
                     if ( event == xmlPullParser.START_TAG){
@@ -365,12 +363,12 @@ public class Giris extends AppCompatActivity {
                                 paletEtiketPrinter, yeniUretimBarkodOnEk, cerabathEtiketID,
                                 locationNo, contract
                         );
-                        Log.d("User MODEL DATA::", user.toString());
+//                        Log.d("User MODEL DATA::", user.toString());
                     userList.add(user);
-//                    kullaniciRef = 0; depoNo = 0; sevkDepoNo = 0; bolumNo = 0; barkodOnEk = "";
-//                    takimBarkodOnek = ""; barkodUzunluk  = 0; takimEtiketID = 0; takimEtiketPrinter = "";
-//                    paletEtiketID = 0; paletDetayliEtiketID = 0; paletEtiketPrinter = ""; yeniUretimBarkodOnEk = "";
-//                    cerabathEtiketID = 0; locationNo = ""; contract = "";
+                        // kullaniciRef = 0; depoNo = 0; sevkDepoNo = 0; bolumNo = 0; barkodOnEk = "";
+                        // takimBarkodOnek = ""; barkodUzunluk  = 0; takimEtiketID = 0; takimEtiketPrinter = "";
+                        // paletEtiketID = 0; paletDetayliEtiketID = 0; paletEtiketPrinter = ""; yeniUretimBarkodOnEk = "";
+                        // cerabathEtiketID = 0; locationNo = ""; contract = "";
                     }
 
                     if ( event == xmlPullParser.END_TAG){
@@ -391,8 +389,6 @@ public class Giris extends AppCompatActivity {
                         if(xmlPullParser.getName().equals("LocationNo")) locationNoBool = false;
                         if(xmlPullParser.getName().equals("Contract")) contractBool = false;
                     }
-
-                    //
                     event = xmlPullParser.next();
                 }
 

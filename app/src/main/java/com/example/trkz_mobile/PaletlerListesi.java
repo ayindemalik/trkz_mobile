@@ -32,7 +32,8 @@ public class PaletlerListesi extends AppCompatActivity {
     PaletAdapter paletAdapter;
     ListView paletlerListview;
     EditText paletAra;
-    String searchText;
+    TextView totalPalet;
+    String searchText; int toplamPalet = 0;
     // Data Variables
     String ifsID = "", tarih ="", kapalimi ="", barkod ="",  cariUnvan="",  lref="";
 
@@ -50,10 +51,12 @@ public class PaletlerListesi extends AppCompatActivity {
 
         paletlerListview =  binding.paletlerListView;
         paletAra = binding.paletAra;
+        totalPalet = binding.totalPalet;
 
 
         paletAdapter = new PaletAdapter(this, R.layout.paletler_list_item);
         paletlerListview.setAdapter(paletAdapter);
+        PaletAdapter.OPERATION = "PALETLER";
 
         // On itemClick Listview
         paletlerListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -72,9 +75,10 @@ public class PaletlerListesi extends AppCompatActivity {
                         + cariUnvan + " / "
                         + lref,Toast.LENGTH_SHORT).show();
                 Intent itent = new Intent(getBaseContext(), YeniPaletOlusturmaDevam.class);
+                itent.putExtra("from", "PaletListesi");
                 itent.putExtra("lrf", lref);
                 itent.putExtra("adet", "0");
-                itent.putExtra("paletTipi", "paletipi");
+                itent.putExtra("paletTipi", cariUnvan);
                 itent.putExtra("urunKodu", "000000");
                 startActivity(itent);
             }
@@ -111,10 +115,6 @@ public class PaletlerListesi extends AppCompatActivity {
             if (System.currentTimeMillis() > (last_text_edit + delay - 500)) {
                 // TODO: do what you need here
                 searchText = paletAra.getText().toString();
-//                if(!musteriID.equals("")){
-//                    Toast.makeText(getBaseContext(), musteriID + " / " +musteriAdi + "/ " + urunBarKodu ,Toast.LENGTH_SHORT).show()
-
-//                }
             }
         }
     };
@@ -140,10 +140,8 @@ public class PaletlerListesi extends AppCompatActivity {
         protected void onPostExecute(Object o) {
             super.onPostExecute(o);
             Log.d("OnPostTRYING_BKG", ".....OnPostTRYING_BKG....");
-//            Log.d("RESTURNED_RESULT --> ", result2.toString());
-//             loadPaletler(result);
             ArrayList<PaletModel> list = paletModelXMLParse(result2);
-//            Log.d("DisplayPlatterArrayList", list.toString());
+            Log.d("TOPLAM_PALETLER:", String.valueOf(list.size()));
 
             ArrayList<PaletModel> palterArrayList = paletModelXMLParse(result2);
 //            ListAdapter listAdapter = new ListAdapter(ctex, siparislerArrayList) ;
@@ -153,10 +151,8 @@ public class PaletlerListesi extends AppCompatActivity {
 //                PaletAdapter.OPERATION = "PALETLER";
 //                paletAdapter.add(palterArrayList.get(i));
 //            }
-
+            totalPalet.setText(String.valueOf(toplamPalet) + " palet");
         }
-
-
     }
 
     public ArrayList<PaletModel> paletModelXMLParse(String result_){
@@ -167,7 +163,9 @@ public class PaletlerListesi extends AppCompatActivity {
             xmlPullParser.setInput(IOUtils.toInputStream(result_),"utf-8");
             int event = xmlPullParser.getEventType();
             Boolean ifsIDBool = false, tarihBool = false, kapalimiBool = false, barkodBool = false,  cariUnvanBool = false,  lrefBool = false;
-            String ifsID = "", tarih ="", kapalimi ="", barkod ="",  cariUnvan="",  lref="";
+            int ifsID = 0, lref= 0;
+            String  tarih ="",  barkod ="",  cariUnvan="";
+            String kapalimi = "false";
             int count = 0;
             while (event != xmlPullParser.END_DOCUMENT)
             {
@@ -187,7 +185,7 @@ public class PaletlerListesi extends AppCompatActivity {
                 }
                 if(event == xmlPullParser.TEXT){ // IfsId
                     if(ifsIDBool){
-                        ifsID = xmlPullParser.getText();
+                        ifsID = Integer.valueOf(xmlPullParser.getText());
                         ifsIDBool=false;
                     }
                 }
@@ -217,32 +215,26 @@ public class PaletlerListesi extends AppCompatActivity {
                 }
                 if(event == xmlPullParser.TEXT){ // LRef
                     if(lrefBool){
-                        lref = xmlPullParser.getText();
+                        lref = Integer.valueOf(xmlPullParser.getText());
                         lrefBool=false;
                     }
                 }
-                if (ifsID != "" && barkod != "" && lref != ""){
+                if (  barkod != "" && lref != 0){
                     count++;
                     PaletModel paletModel = new PaletModel(ifsID, tarih, kapalimi, barkod, cariUnvan, lref);
                     paletlerArrayList.add(paletModel);
-                    Log.d("MODEL DATA::", paletModel.toString());
-                    PaletAdapter.OPERATION = "PALETLER";
+//                    Log.d("MODEL DATA::", paletModel.toString());
                     paletAdapter.add(paletModel);
-                    ifsID = ""; tarih =""; kapalimi =""; barkod ="";  cariUnvan="";  lref="";
+                    paletAdapter.notifyDataSetChanged();
+                    ifsID = 0; tarih =""; kapalimi =""; barkod ="";  cariUnvan="";  lref=0;
                 }
                 if(event == xmlPullParser.END_TAG){
-                    if(xmlPullParser.getName().equals("IfsId"))
-                        ifsIDBool =false;
-                    if(xmlPullParser.getName().equals("Tarih"))
-                        tarihBool =false;
-                    if(xmlPullParser.getName().equals("KapaliMi"))
-                        kapalimiBool =false;
-                    if(xmlPullParser.getName().equals("Barkod"))
-                        barkodBool =false;
-                    if(xmlPullParser.getName().equals("cari_unvan1"))
-                        cariUnvanBool =false;
-                    if(xmlPullParser.getName().equals("LRef"))
-                        lrefBool =false;
+                    if(xmlPullParser.getName().equals("IfsId")) ifsIDBool =false;
+                    if(xmlPullParser.getName().equals("Tarih")) tarihBool =false;
+                    if(xmlPullParser.getName().equals("KapaliMi")) kapalimiBool =false;
+                    if(xmlPullParser.getName().equals("Barkod")) barkodBool =false;
+                    if(xmlPullParser.getName().equals("cari_unvan1")) cariUnvanBool =false;
+                    if(xmlPullParser.getName().equals("LRef")) lrefBool =false;
                 }
                 event = xmlPullParser.next();
             }
@@ -250,6 +242,9 @@ public class PaletlerListesi extends AppCompatActivity {
         }catch (Exception ex){
             ex.printStackTrace();
         }
+        toplamPalet = paletlerArrayList.size();
+        Log.d("TOPLAM_PALETLER:", String.valueOf(toplamPalet));
+
         return paletlerArrayList;
     }
 }

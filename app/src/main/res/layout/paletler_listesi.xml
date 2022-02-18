@@ -1,24 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     tools:context=".PaletlerListesi">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/paletlistesiHomeTitle"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:text="Paletler Listesi"
-        android:textAlignment="center"
-        android:textColor="@color/colorPrimary"
-        android:background="?attr/colorButtonNormal"
-        android:textSize="30dp"
-        />
+        android:id="@+id/header"
+        android:gravity="center"
+        android:background="#F1FeFF">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="40sp"
+            android:layout_margin="5dp"
+            android:id="@+id/paletlistesiHomeTitle"
+            android:text="Paletler Listesi"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:background="@color/white"
+            android:textSize="30dp" />
+        <TextView
+            android:layout_width="110sp"
+            android:layout_height="40sp"
+            android:layout_margin="5dp"
+            android:layout_toRightOf="@id/paletlistesiHomeTitle"
+            android:id="@+id/totalPalet"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:text="Total"
+            android:textColor="@color/black"
+            android:textSize="20dp"/>
+    </RelativeLayout>
+
+<!--    <TextView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/paletlistesiHomeTitle"-->
+<!--        android:layout_marginTop="5dp"-->
+<!--        android:layout_marginBottom="5dp"-->
+<!--        android:text="Paletler Listesi"-->
+<!--        android:textAlignment="center"-->
+<!--        android:textColor="@color/colorPrimary"-->
+<!--        android:background="?attr/colorButtonNormal"-->
+<!--        android:textSize="30dp"-->
+<!--        />-->
     <EditText
         android:layout_below="@+id/paletlistesiHomeTitle"
         android:id="@+id/paletAra"
@@ -37,4 +68,4 @@
         tools:listitem="@layout/paletler_list_item"
         />
 
-</RelativeLayout>
+</LinearLayout>

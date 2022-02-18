@@ -1,5 +1,6 @@
 package com.example.trkz_mobile;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,6 +15,9 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -50,7 +54,7 @@ public class YeniPaletOlusturma extends AppCompatActivity {
     Button ypBtnDevam;
     CustomDropDownArrayAdapter customDropDownArrayAdapter, pTcustomDropDownArrayAdapter;
     PaletTipiSpinnerAdapter paletTipiSpinnerAdapter;
-    String musteriID, musteriAdi, etiketTipi, urunBarKodu, urunKodu, paletTuru;
+    String musteriID, musteriAdi, etiketTipi, urunBarKodu, urunKodu, paletTuru, eskiKod;
     int adet ;
     RadioGroup ypKisaBoy;
 
@@ -80,16 +84,17 @@ public class YeniPaletOlusturma extends AppCompatActivity {
         binding = YeniPaletOlusturmaBinding.inflate(getLayoutInflater());
         View root = binding.getRoot();
         setContentView(root);
-        pref = getSharedPreferences("UserPreferences", 0);
+//        pref = getSharedPreferences("UserPreferences", 0);
         // CASTING
         setBindings();
 
+        pref = getSharedPreferences("UserPreferences", 0);
         setUserData(pref);
 
 //        customDropDownArrayAdapter = new CustomDropDownArrayAdapter(this, R.layout.yp_customers);
 //        pTcustomDropDownArrayAdapter = new CustomDropDownArrayAdapter()
 //        ypFirmaAdi.setAdapter(customDropDownArrayAdapter);
-        pref = getSharedPreferences("UserPreferences", 0);
+
 //        int kullRef = pref.getInt("kullaniciRef", 0);
 
         task = new BackgroudTask(this);
@@ -164,6 +169,32 @@ public class YeniPaletOlusturma extends AppCompatActivity {
             }
         });
 
+        // CASTING AND LIST ITEM IN DIALOG
+        ypKisaBoy.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                RadioButton selected = findViewById(R.id.pkisa);
+                if (selected.isChecked()){
+                    kisa_boy = "K";
+                    Toast.makeText(getBaseContext(), kisa_boy+" is secildi", Toast.LENGTH_SHORT).show();
+                    // LOAD HANDLIND TYPES
+                }
+                else{
+                    selected = findViewById(R.id.pboy);
+                    if (selected.isChecked()){
+                        kisa_boy = "B";
+                        Toast.makeText(getBaseContext(), kisa_boy+" is secildi", Toast.LENGTH_SHORT).show();
+                        // LOAD HANDLIND TYPES
+                    }
+                }
+
+                // LOAD HANDLIND TYPES
+//                Toast.makeText(getBaseContext(),  " HU Data: Cat :" +  categoryID +"-- KB: "+kisa_boy
+//                        +"--  kod: "+ ypUrunKodu.getText().toString(),Toast.LENGTH_SHORT).show();
+                loadHandlingUnitTypes(categoryID, kisa_boy, ypUrunKodu.getText().toString());
+            }
+        });
+
         // PALET OLUSTURMA
         ypBtnDevam.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -200,10 +231,10 @@ public class YeniPaletOlusturma extends AppCompatActivity {
                     displayDialog("Lütfen ürün barkodunu okutarak ürün kodudu bulun girin", "dataControl");
                     return;
                 }
-                if(musteriAdi.equals("Müşteri Seçin") || musteriID.equals("")){
-                    displayDialog("Lütfen Müşteriyi seçin", "dataControl");
-                    return;
-                }
+//                if(musteriAdi.equals("Müşteri Seçin") || musteriID.equals("")){
+//                    displayDialog("Lütfen Müşteriyi seçin", "dataControl");
+//                    return;
+//                }
 
                 // DISPLAY MESSAGE BEFORE DEVAM
                 dialogBody = "Bu bilgilere göre palet oluşturulmasını emin misiniz ?"
@@ -218,31 +249,7 @@ public class YeniPaletOlusturma extends AppCompatActivity {
             }
         });
 
-        // CASTING AND LIST ITEM IN DIALOG
-        ypKisaBoy.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                RadioButton selected = findViewById(R.id.pkisa);
-                if (selected.isChecked()){
-                    kisa_boy = "K";
-                    Toast.makeText(getBaseContext(), kisa_boy+" is secildi", Toast.LENGTH_SHORT).show();
-                    // LOAD HANDLIND TYPES
-                }
-                else{
-                    selected = findViewById(R.id.pboy);
-                    if (selected.isChecked()){
-                        kisa_boy = "B";
-                        Toast.makeText(getBaseContext(), kisa_boy+" is secildi", Toast.LENGTH_SHORT).show();
-                        // LOAD HANDLIND TYPES
-                    }
-                }
 
-                // LOAD HANDLIND TYPES
-//                Toast.makeText(getBaseContext(),  " HU Data: Cat :" +  categoryID +"-- KB: "+kisa_boy
-//                        +"--  kod: "+ ypUrunKodu.getText().toString(),Toast.LENGTH_SHORT).show();
-                    loadHandlingUnitTypes(categoryID, kisa_boy, ypUrunKodu.getText().toString());
-            }
-        });
 
         Toast.makeText(getBaseContext(), "User data " + user.getKullaniciRef(), Toast.LENGTH_LONG);
     }
@@ -326,10 +333,14 @@ public class YeniPaletOlusturma extends AppCompatActivity {
                     Toast.makeText(getBaseContext(), "Evet seçildi", Toast.LENGTH_SHORT);
 
                     Intent itent = new Intent(getBaseContext(), YeniPaletOlusturmaDevam.class);
+                    itent.putExtra("from", "PaletOlusturma");
+                    itent.putExtra("cariKod", musteriID);
                     itent.putExtra("lrf", paletLrf);
                     itent.putExtra("adet", String.valueOf(adet));
                     itent.putExtra("paletTipi", etiketTipi);
                     itent.putExtra("urunKodu", urunKodu);
+                    itent.putExtra("urunTani", ypUrunTani.getText().toString());
+                    itent.putExtra("eskiKodu", eskiKod);
                     startActivity(itent);
                 }
             });
@@ -341,12 +352,14 @@ public class YeniPaletOlusturma extends AppCompatActivity {
         int PaletRef_ = 0; int KullaniciRef_ = user.getKullaniciRef();
         String cariKod_ = musteriID;
         String cariAdi_ = musteriAdi;
+            if(musteriAdi.equals("Müşteri Seçin"))
+                musteriAdi = "";
 
         Boolean BoyMu_ = false;
         if(kisa_boy.equals("B")){ BoyMu_= true; }
         if(kisa_boy.equals("K")){ BoyMu_= false; }
 
-        String PaletTipi_ = etiketTipi, SecilmisUrunKodu_ = urunKodu;
+        String PaletTipi_ = etiketTipi, SecilmisUrunKodu_ = eskiKod;
         int takimAdet_ = 0;
         Boolean takimDetayli_ = false;
         int Adet_ = adet;
@@ -365,6 +378,30 @@ public class YeniPaletOlusturma extends AppCompatActivity {
             YeniKod_, IfsHandlingUnitType_,  BarkodOnEk_,  String.valueOf(BarkodUzunluk_),
             kullaniciLocation_);
     }
+
+    // To activate Menubar oprions
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.palet_islem_menu, menu);
+//        return super.onCreateOptionsMenu(menu);
+        return true;
+    }
+
+    // On Menu Bar item options click
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.paletBitir:
+                Toast.makeText(this, "Malet bit islemi", Toast.LENGTH_SHORT).show();
+            case R.id.item2:
+                Toast.makeText(this, "Uygulamadan cikis", Toast.LENGTH_SHORT).show();
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
+
     // Etiketler getirme
     void loadEtiket(){
 //        String[] etiketler = new String[]{"Turkuaz", "Logosuz", "Majestik", "Açık Ürün", "Ekonomik", "Karışık"};
@@ -396,8 +433,13 @@ public class YeniPaletOlusturma extends AppCompatActivity {
                 for(int i = 0; i<yeniProdArrayList.size(); i++){
                     ypUrunKodu.setText(yeniProdArrayList.get(i).getYeniKodu());
                     ypUrunTani.setText(yeniProdArrayList.get(i).getYeniTanim());
+                    eskiKod = yeniProdArrayList.get(i).getEskiKod();
+                    // NOT ACTUALLY NEEDED
                     PaletAdapter.OPERATION = "YENI_KODLAR";
-                    paletAdapter.addYeniKod(new ProductModel(yeniProdArrayList.get(i).getYeniKodu(), yeniProdArrayList.get(i).getYeniTanim()));
+                    paletAdapter.addYeniKod(
+                            new ProductModel(yeniProdArrayList.get(i).getYeniKodu(),
+                                    yeniProdArrayList.get(i).getYeniTanim(),
+                                    yeniProdArrayList.get(i).getEskiKod()));
 
                     yeniKodListview.setAdapter(paletAdapter);
 //                    dialog =  builder.create();
@@ -415,7 +457,12 @@ public class YeniPaletOlusturma extends AppCompatActivity {
 
 //                    yeniKodListview = (ListView) row.findViewById(R.id.listView);
                     PaletAdapter.OPERATION = "YENI_KODLAR";
-                    paletAdapter.addYeniKod(new ProductModel(yeniProdArrayList.get(i).getYeniKodu(), yeniProdArrayList.get(i).getYeniTanim()));
+                    paletAdapter.addYeniKod(new ProductModel(
+                                yeniProdArrayList.get(i).getYeniKodu(),
+                                yeniProdArrayList.get(i).getYeniTanim(),
+                                yeniProdArrayList.get(i).getEskiKod()
+                            )
+                    );
 
                     yeniKodListview.setAdapter(paletAdapter);
 //                    builder.setView(row);
@@ -426,10 +473,11 @@ public class YeniPaletOlusturma extends AppCompatActivity {
             dialog.show();
             yeniKodListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Toast.makeText(getBaseContext(),  " Alert list item clicked " ,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(),  " Alert list item clicked ", Toast.LENGTH_SHORT).show();
                     ProductModel productModel = (ProductModel) paletAdapter.getItem(position);
                     ypUrunKodu.setText(productModel.getYeniKodu());
                     ypUrunTani.setText(productModel.getYeniTanim());
+                    eskiKod = productModel.getEskiKod();
                     dialog.dismiss();
                 }
             });
@@ -628,8 +676,9 @@ public class YeniPaletOlusturma extends AppCompatActivity {
             XmlPullParser xmlPullParser = xmlPullParserFactory.newPullParser();
             xmlPullParser.setInput(IOUtils.toInputStream(result_),"utf-8");
             int event = xmlPullParser.getEventType();
-            Boolean yeniKodBool = false, yeniTanimBool = false;
-            String yeniKod= "", yeniTanim = ""; int count = 0;
+            Boolean yeniKodBool = false, yeniTanimBool = false, eskiKodBool = false;
+            String yeniKod= "", yeniTanim = "", eskiKod = "";
+            int count = 0;
 
             while (event != xmlPullParser.END_DOCUMENT)
             {
@@ -638,6 +687,8 @@ public class YeniPaletOlusturma extends AppCompatActivity {
                         yeniKodBool = true;
                     if(xmlPullParser.getName().equals("YeniTanim"))
                         yeniTanimBool = true;
+                    if(xmlPullParser.getName().equals("EskiKod"))
+                        eskiKodBool = true;
                 }
 
                 if(event == xmlPullParser.TEXT){ // If
@@ -654,12 +705,19 @@ public class YeniPaletOlusturma extends AppCompatActivity {
                     }
                 }
 
-                if (!yeniKod.equals("") && !yeniTanim.equals("")){
+                if(event == xmlPullParser.TEXT){ //
+                    if(eskiKodBool){
+                        eskiKod = xmlPullParser.getText();
+                        eskiKodBool=false;
+                    }
+                }
+
+                if (!yeniKod.equals("") && !yeniTanim.equals("") && !eskiKod.equals("")){
                     count++;
-                    ProductModel productModel = new ProductModel(yeniKod, yeniTanim);
+                    ProductModel productModel = new ProductModel(yeniKod, yeniTanim, eskiKod);
                     Log.d("Prod MODEL DATA::", productModel.toString());
                     productArrayList.add(productModel);
-                    yeniKod = ""; yeniTanim ="";
+                    yeniKod = ""; yeniTanim =""; eskiKod = "";
                 }
 
                 if(event == xmlPullParser.END_TAG){
@@ -667,6 +725,8 @@ public class YeniPaletOlusturma extends AppCompatActivity {
                         yeniKodBool =false;
                     if(xmlPullParser.getName().equals("YeniTanim"))
                         yeniTanimBool =false;
+                    if(xmlPullParser.getName().equals("EskiKod"))
+                        yeniKodBool =false;
                 }
                 event = xmlPullParser.next();
             }

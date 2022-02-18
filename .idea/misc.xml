@@ -3,14 +3,24 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/maliki.moustapha/AndroidStudioProjects/trkz_mobile/app/src/main/res/drawable/dialog_close.xml" value="0.3182291666666667" />
         <entry key="..\:/Users/maliki.moustapha/AndroidStudioProjects/trkz_mobile/app/src/main/res/layout/dialog_layout.xml" value="0.23822463768115942" />
         <entry key="..\:/Users/maliki.moustapha/AndroidStudioProjects/trkz_mobile/app/src/main/res/layout/dialog_list_item.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/maliki.moustapha/AndroidStudioProjects/trkz_mobile/app/src/main/res/layout/dialog_row_item.xml" value="0.3614583333333333" />
         <entry key="..\:/Users/maliki.moustapha/AndroidStudioProjects/trkz_mobile/app/src/main/res/layout/giris_activity.xml" value="0.17135416666666667" />
         <entry key="..\:/Users/maliki.moustapha/AndroidStudioProjects/trkz_mobile/app/src/main/res/layout/paketleme_fragment.xml" value="0.34375" />
         <entry key="..\:/Users/maliki.moustapha/AndroidStudioProjects/trkz_mobile/app/src/main/res/layout/paketleme_operation_dialog.xml" value="0.3614583333333333" />
+        <entry key="..\:/Users/maliki.moustapha/AndroidStudioProjects/trkz_mobile/app/src/main/res/layout/paketleme_paletler_tab_fragment.xml" value="0.21105072463768115" />
+        <entry key="..\:/Users/maliki.moustapha/AndroidStudioProjects/trkz_mobile/app/src/main/res/layout/paketleme_yeni_palet_tab_fragment.xml" value="0.21105072463768115" />
+        <entry key="..\:/Users/maliki.moustapha/AndroidStudioProjects/trkz_mobile/app/src/main/res/layout/palet_bilgileri.xml" value="0.3767258382642998" />
         <entry key="..\:/Users/maliki.moustapha/AndroidStudioProjects/trkz_mobile/app/src/main/res/layout/palet_olusturma_menu.xml" value="0.3614583333333333" />
+        <entry key="..\:/Users/maliki.moustapha/AndroidStudioProjects/trkz_mobile/app/src/main/res/layout/paletler_list_item.xml" value="0.13247213779128672" />
+        <entry key="..\:/Users/maliki.moustapha/AndroidStudioProjects/trkz_mobile/app/src/main/res/layout/paletler_listesi.xml" value="0.228125" />
+        <entry key="..\:/Users/maliki.moustapha/AndroidStudioProjects/trkz_mobile/app/src/main/res/layout/yeni_palet_olusturma.xml" value="0.9637096774193549" />
         <entry key="..\:/Users/maliki.moustapha/AndroidStudioProjects/trkz_mobile/app/src/main/res/layout/yeni_palet_olusturma_devam.xml" value="0.3614583333333333" />
+        <entry key="..\:/Users/maliki.moustapha/AndroidStudioProjects/trkz_mobile/app/src/main/res/menu/bar_menu.xml" value="0.21822916666666667" />
+        <entry key="..\:/Users/maliki.moustapha/AndroidStudioProjects/trkz_mobile/app/src/main/res/menu/navigation_menu.xml" value="0.2682051282051282" />
+        <entry key="..\:/Users/maliki.moustapha/AndroidStudioProjects/trkz_mobile/app/src/main/res/xml/network_security_config.xml" value="0.20729166666666668" />
         <entry key="..\:/android_workspace/Trkz_mobile/app/src/main/res/drawable-v24/ic_menu.xml" value="0.1" />
         <entry key="..\:/android_workspace/Trkz_mobile/app/src/main/res/drawable/add_item.xml" value="0.22916666666666666" />
         <entry key="..\:/android_workspace/Trkz_mobile/app/src/main/res/drawable/bg_spinner.xml" value="0.2546875" />

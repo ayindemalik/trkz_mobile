@@ -41,10 +41,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/kullaniciID"
-            android:textColor="#000"
-
+            android:textColor="@color/black"
+            android:maxLines="1"
             android:hint="@string/girsText"
-            android:textSize="25sp"
+            android:textSize="30sp"
+            android:padding="8sp"
             android:background="#fafafa"/>
     </LinearLayout>
 

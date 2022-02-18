@@ -39,7 +39,7 @@
         android:background="@color/teal_200"
         android:textColor="@color/white"
         android:textSize="20dp"
-        android:text="Palet Oluştur" />
+        android:text="Palet İşlemleri" />
 
     <Button
         android:id="@+id/paketMenuBtnTolsturma"
@@ -50,7 +50,7 @@
         android:background="@color/teal_200"
         android:textColor="@color/white"
         android:textSize="20dp"
-        android:text="Takım Oluştur" />
+        android:text="Takım İşlemleri" />
 
     <Button
         android:id="@+id/paketMenuBtnPBulma"
@@ -63,16 +63,16 @@
         android:textSize="20dp"
         android:text="Palet Bul" />
 
-    <Button
-        android:id="@+id/paketMenuBtnUrBkOlustur"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginHorizontal="26dp"
-        android:background="@color/teal_200"
-        android:textColor="@color/white"
-        android:textSize="20dp"
-        android:text="Üretim Barkod Oluştur" />
+<!--    <Button-->
+<!--        android:id="@+id/paketMenuBtnUrBkOlustur"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="55dp"-->
+<!--        android:layout_marginTop="8dp"-->
+<!--        android:layout_marginHorizontal="26dp"-->
+<!--        android:background="@color/teal_200"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:textSize="20dp"-->
+<!--        android:text="Üretim Barkod Oluştur" />-->
 
     <Button
         android:id="@+id/paketMenuBtnPaletlerTab"

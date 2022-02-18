@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/paketlemeHomeTitle"
             android:layout_marginTop="20dp"
-            android:text="Palet Oluşturma İşlemleri"
+            android:text="Palet İşlemleri"
             android:textAlignment="center"
             android:textColor="@color/teal_200"
             android:textSize="30dp"/>
